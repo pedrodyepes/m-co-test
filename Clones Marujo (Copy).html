@@ -1,0 +1,1313 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Clones Marujo (Copy)</title>
+<style>
+:root{
+  --bg:#f4f6f1;--surface:#ffffff;--surface2:#eef2ea;--ink:#1c2a20;--ink2:#56655a;--line:#dfe6d9;
+  --brand:#1f6b3a;--brand-ink:#ffffff;--brand-soft:#dff0e4;
+  --c-in:#1f8a4c;--c-tr:#2563c9;--c-sala:#7b4fd0;--c-disp:#b86a00;--c-baja:#c62f3a;
+  --c-germ:#00796b;--c-germ-bg:#d8f0ec;
+  --c-in-bg:#e0f3e7;--c-tr-bg:#e1ebfb;--c-sala-bg:#ece4fa;--c-disp-bg:#fcefd8;--c-baja-bg:#fbe3e5;
+  --warn:#b86a00;--bad:#c62f3a;--ok:#1f8a4c;--shadow:0 1px 2px rgba(20,40,25,.06),0 4px 14px rgba(20,40,25,.06);
+  --r:14px;
+}
+@media not all{:root{
+  --bg:#0f1712;--surface:#17221a;--surface2:#1d2b21;--ink:#e8f0ea;--ink2:#9fb2a4;--line:#2a3b2e;
+  --brand:#49b878;--brand-ink:#08150d;--brand-soft:#1c3827;
+  --c-in:#52c581;--c-tr:#78a6f2;--c-sala:#b79af0;--c-disp:#f0a940;--c-baja:#f27a85;
+  --c-germ:#4fd1c0;--c-germ-bg:#123532;
+  --c-in-bg:#173324;--c-tr-bg:#18273f;--c-sala-bg:#2a2142;--c-disp-bg:#3a2d12;--c-baja-bg:#3d1b20;
+  --warn:#f0a940;--bad:#f27a85;--ok:#52c581;--shadow:none}}
+:root[data-theme="off"]{
+  --bg:#0f1712;--surface:#17221a;--surface2:#1d2b21;--ink:#e8f0ea;--ink2:#9fb2a4;--line:#2a3b2e;
+  --brand:#49b878;--brand-ink:#08150d;--brand-soft:#1c3827;
+  --c-in:#52c581;--c-tr:#78a6f2;--c-sala:#b79af0;--c-disp:#f0a940;--c-baja:#f27a85;
+  --c-germ:#4fd1c0;--c-germ-bg:#123532;
+  --c-in-bg:#173324;--c-tr-bg:#18273f;--c-sala-bg:#2a2142;--c-disp-bg:#3a2d12;--c-baja-bg:#3d1b20;
+  --warn:#f0a940;--bad:#f27a85;--ok:#52c581;--shadow:none}
+html{color-scheme:light}
+select,option,select option{background:#fff!important;color:#1c2a20!important}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:84px;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.hrow{display:flex;align-items:center;gap:12px;padding:12px 0}
+.brand{font-weight:800;letter-spacing:.04em;font-size:17px}
+.brand small{display:block;font-weight:500;letter-spacing:0;color:var(--ink2);font-size:12px}
+.logo{width:36px;height:36px;border-radius:10px;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;flex:none}
+.spacer{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:700;background:var(--surface2);color:var(--ink2);border:0}
+.pill.ok{background:var(--c-in-bg);color:var(--ok)}.pill.bad{background:var(--c-baja-bg);color:var(--bad)}.pill.warn{background:var(--c-disp-bg);color:var(--warn)}
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--surface);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:30}
+.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;padding:6px 2px;border-radius:12px;color:var(--ink2);font-size:11px;font-weight:700;cursor:pointer;min-height:48px}
+.nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav button.on{color:var(--brand);background:var(--brand-soft)}
+@media(min-width:820px){
+  body{padding-bottom:40px}
+  .nav{position:static;border:0;padding:0;background:none;gap:4px}
+  .nav button{flex-direction:row;gap:8px;font-size:14px;padding:8px 14px;min-height:0}
+  .hrow{flex-wrap:nowrap}
+}
+main{padding:18px 0}
+h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin:26px 0 10px;font-weight:800}
+h2:first-child{margin-top:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px}
+.hero{background:var(--brand);color:var(--brand-ink);border-radius:18px;padding:20px;display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 24px;box-shadow:var(--shadow)}
+.hero .lbl{font-size:12px;letter-spacing:.1em;font-weight:800;opacity:.85}
+.hero .num{font-size:64px;line-height:1;font-weight:800;font-variant-numeric:tabular-nums}
+.hero .sub{font-size:13px;opacity:.9;max-width:34ch}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+@media(min-width:700px){.kpis{grid-template-columns:repeat(5,1fr)}}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;border-left:5px solid var(--line)}
+.kpi .l{font-size:11px;font-weight:800;letter-spacing:.07em;color:var(--ink2);text-transform:uppercase}
+.kpi .n{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1;margin-top:2px}
+.kpi .s{font-size:12px;color:var(--ink2);margin-top:2px}
+.kpi.inv{border-left-color:var(--c-in)}.kpi.sala{border-left-color:var(--c-sala)}.kpi.venta{border-left-color:var(--c-tr)}.kpi.disp{border-left-color:var(--c-disp)}.kpi.baja{border-left-color:var(--c-baja)}
+.grid2{display:grid;gap:12px}
+@media(min-width:820px){.grid2{grid-template-columns:1fr 1fr}}
+.bar{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:14px}
+.bar .nm{width:84px;flex:none;font-weight:700;font-size:13px}
+.bar .tr{flex:1;height:14px;border-radius:8px;background:var(--surface2);overflow:hidden;position:relative}
+.bar .fi{position:absolute;left:0;top:0;bottom:0;background:var(--c-in);opacity:.35;border-radius:8px}
+.bar .fi2{position:absolute;left:0;top:0;bottom:0;background:var(--c-in);border-radius:8px}
+.bar .v{width:96px;text-align:right;font-variant-numeric:tabular-nums;font-size:13px;color:var(--ink2)}
+.bar .v b{color:var(--ink)}
+.bar.room .fi2{background:var(--c-sala)}.bar.room.over .fi2{background:var(--bad)}
+.feed{list-style:none;margin:0;padding:0}
+.mv{display:grid;grid-template-columns:auto 1fr auto;gap:2px 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.mv:last-child{border-bottom:0}
+.dot{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:13px;grid-row:span 2}
+.dot.germ{background:var(--c-germ-bg);color:var(--c-germ)}.q.germ{color:var(--c-germ)}.kpi.germ{border-left-color:var(--c-germ)}
+.dot.entrada{background:var(--c-in-bg);color:var(--c-in)}.dot.trasplante{background:var(--c-tr-bg);color:var(--c-tr)}.dot.sala{background:var(--c-sala-bg);color:var(--c-sala)}.dot.dispensa{background:var(--c-disp-bg);color:var(--c-disp)}.dot.baja{background:var(--c-baja-bg);color:var(--c-baja)}
+.mv .t{font-weight:700;font-size:14px;min-width:0;overflow-wrap:anywhere}
+.mv .d{font-size:12px;color:var(--ink2);grid-column:2;min-width:0;overflow-wrap:anywhere}
+.mv .q{font-weight:800;font-variant-numeric:tabular-nums;grid-row:span 2;text-align:right;font-size:16px}
+.mv .q small{display:block;font-weight:600;font-size:11px;color:var(--ink2)}
+.q.entrada{color:var(--c-in)}.q.trasplante{color:var(--c-tr)}.q.sala{color:var(--c-sala)}.q.dispensa{color:var(--c-disp)}.q.baja{color:var(--c-baja)}
+.mv .act{grid-column:2/4;margin-top:4px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 16px;font-weight:700;cursor:pointer;min-height:44px}
+.btn.primary{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn.sm{padding:6px 10px;min-height:32px;font-size:13px;border-radius:9px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.big{width:100%;min-height:52px;font-size:17px}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:700px){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tile{border:2px solid var(--line);background:var(--surface);border-radius:var(--r);padding:14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:4px}
+.tile b{font-size:15px}.tile span{font-size:12px;color:var(--ink2)}
+.tile .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:800;margin-bottom:4px}
+.tile.on{border-color:var(--brand);background:var(--brand-soft)}
+.tile[data-f=entrada] .ic{background:var(--c-in-bg);color:var(--c-in)}.tile[data-f=trasplante] .ic{background:var(--c-tr-bg);color:var(--c-tr)}.tile[data-f=sala] .ic{background:var(--c-sala-bg);color:var(--c-sala)}.tile[data-f=salida] .ic{background:var(--c-disp-bg);color:var(--c-disp)}
+form{display:none;margin-top:14px}form.on{display:block}
+.fgrid{display:grid;gap:14px}
+@media(min-width:700px){.fgrid{grid-template-columns:1fr 1fr}.fgrid .full{grid-column:1/-1}}
+label.f{display:block;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+label.f .in{display:block;margin-top:6px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--ink)}
+input[type=text],input[type=number],input[type=date],select,textarea{width:100%;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:12px;min-height:46px;font-size:16px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--brand);outline-offset:1px;border-color:var(--brand)}
+input:disabled,select:disabled{background:var(--surface2);color:var(--ink2)}
+textarea{min-height:70px;resize:vertical}
+.hint{font-size:13px;color:var(--ink2);margin-top:6px;text-transform:none;letter-spacing:0;font-weight:500}
+.hint.ok{color:var(--ok)}.hint.bad{color:var(--bad);font-weight:700}.hint.warn{color:var(--warn);font-weight:700}
+.seg{display:flex;gap:6px}
+.seg label{flex:1;position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:block;text-align:center;padding:12px;border:1.5px solid var(--line);border-radius:12px;font-weight:800;background:var(--surface)}
+.seg input:checked+span{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.seg input:focus-visible+span{outline:2px solid var(--brand);outline-offset:2px}
+.msg{margin-top:12px;padding:12px 14px;border-radius:12px;font-weight:700;font-size:14px;display:none}
+.msg.on{display:block}.msg.bad{background:var(--c-baja-bg);color:var(--bad)}.msg.ok{background:var(--c-in-bg);color:var(--ok)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:7px 13px;font-weight:700;font-size:13px;cursor:pointer;min-height:36px}
+.chip.on{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.filters input[type=text]{flex:1;min-width:160px}
+.filters select{width:auto;min-width:150px}
+.stock{display:grid;gap:10px}
+@media(min-width:760px){.stock{grid-template-columns:1fr 1fr}}
+.bk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;box-shadow:var(--shadow)}
+.bk .top{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.code{font-weight:800;font-size:12px;background:var(--surface2);border-radius:8px;padding:4px 8px;white-space:nowrap}
+.bk .gn{font-weight:800;font-size:16px;min-width:0;overflow-wrap:anywhere}
+.bk .gs{font-size:12px;color:var(--ink2)}
+.lit{margin-left:auto;font-size:12px;font-weight:800;padding:4px 10px;border-radius:99px;background:var(--brand-soft);color:var(--brand);white-space:nowrap}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.sx{background:var(--surface2);border-radius:10px;padding:8px 10px}
+.sx .l{font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--ink2);text-transform:uppercase}
+.sx .n{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.15}
+.sx.zero .n{color:var(--ink2);opacity:.55}
+.sx.sala{background:var(--c-sala-bg)}.sx.sala .n{color:var(--c-sala)}
+.sx.disp{background:var(--c-disp-bg)}.sx.disp .n{color:var(--c-disp)}
+.sx.of{background:var(--c-in-bg)}.sx.of .n{color:var(--c-in)}
+.sx.of.zero{background:var(--surface2)}
+.sx.neg{background:var(--c-baja-bg)}.sx.neg .n{color:var(--bad)}
+.sx.na .n{font-size:13px;color:var(--ink2);padding-top:6px}
+.empty{padding:28px 12px;text-align:center;color:var(--ink2)}
+.banner{border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.banner.warn{background:var(--c-disp-bg);color:var(--warn)}.banner.bad{background:var(--c-baja-bg);color:var(--bad)}
+.banner .grow{flex:1;min-width:200px}
+.ctl{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.ctl:last-child{border-bottom:0}
+.ctl i{font-style:normal;font-weight:800;width:22px;flex:none}
+.ctl.ok i{color:var(--ok)}.ctl.bad i{color:var(--bad)}.ctl.warn i{color:var(--warn)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:96px;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;z-index:50;max-width:92vw;display:none;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.toast.on{display:block}
+.view{display:none}.view.on{display:block}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12px;color:var(--ink2);margin:6px 0 12px}
+.legend b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.mtx{padding:6px 16px}
+.mh,.mr{display:grid;grid-template-columns:minmax(0,1fr) 62px 62px 62px;gap:6px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.mh{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}.mh div+div{text-align:right}
+.mr:last-child{border-bottom:0}.mg{font-weight:700;overflow-wrap:anywhere}
+.mc{text-align:right;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}.mc.z{color:var(--ink2);opacity:.4;font-weight:600}.mc.tt{color:var(--c-in)}
+.mf{background:var(--surface2);margin:0 -16px;padding:9px 16px;border-radius:0 0 var(--r) var(--r);border-bottom:0}
+.cl{margin-bottom:14px}
+.clh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.clh b{font-size:18px}.clh .sz{font-size:13px;color:var(--ink2);font-weight:700}
+.cgrid{display:grid;gap:2px;margin:10px 0;justify-content:start}
+.cell{border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;text-shadow:0 1px 1px rgba(0,0,0,.35);cursor:pointer;width:100%;height:auto;aspect-ratio:1/1;overflow:hidden;border-radius:5px;display:grid;place-items:center;font-size:9px;font-weight:800;color:#fff;letter-spacing:0;min-width:0}
+.cellwrap{overflow-x:auto}.cell b{font-size:8px}.cell span{font-size:7px;font-weight:700}
+.cell.big{aspect-ratio:auto;min-height:60px;padding:4px;text-align:center}.cell.big b{font-size:10px;overflow-wrap:anywhere}.cell.big span{font-size:10px}.cell.vac.big{min-height:60px}
+.tip{min-height:20px;margin:0 0 8px}.ced{background:var(--surface2);border-radius:12px;padding:12px;margin:10px 0}.ced input{min-height:40px;padding:8px}.ced .addrow{align-items:center}
+.cell.vac{background:transparent;border:1.5px dashed var(--line)}
+.lg{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}.lg:last-child{border-bottom:0}
+.lg i{width:16px;height:16px;border-radius:5px;flex:none}.lg span{flex:1;min-width:0;overflow-wrap:anywhere}.lg b{font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chip2{border:1.5px solid var(--line);background:var(--surface2);border-radius:99px;padding:6px 8px 6px 12px;font-weight:700;font-size:13px;cursor:pointer;min-height:34px}.chip2 b{color:var(--ink2);margin-left:4px}.chip2.arm{background:var(--c-baja-bg);color:var(--bad);border-color:var(--bad)}.addrow{display:flex;gap:8px}.addrow input{flex:1}.nav button{font-size:10px;padding:6px 0}@media(min-width:820px){.nav button{font-size:14px;padding:8px 14px}}.gact{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+
+.modal{position:fixed;inset:0;background:rgba(10,20,14,.55);display:none;align-items:center;justify-content:center;z-index:80;padding:16px}
+.modal.on{display:flex}
+.mbox{background:var(--surface);border-radius:18px;padding:18px;max-width:440px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.35);max-height:90vh;overflow:auto}
+.mbox h3{margin:0 0 6px;font-size:18px}.mbox textarea{min-height:84px}
+.mv.an{opacity:.62}.mv.an .t{text-decoration:line-through}
+.tag{padding:1px 8px!important;font-size:10px!important;margin-left:6px;vertical-align:middle}
+.aud{grid-column:2/4;font-size:12px;color:var(--ink2);margin-top:4px}.aud summary{cursor:pointer;font-weight:700}.aud ul{margin:6px 0 0;padding-left:18px}.aud li{margin:4px 0;overflow-wrap:anywhere}
+.lg em.age{font-style:normal;font-weight:700;font-size:12px;color:var(--ink2);white-space:nowrap}.lg em.age.late{color:var(--bad)}
+.mv .act .btn{margin:0 6px 4px 0}
+.hrow{flex-wrap:wrap;row-gap:6px}.brand{min-width:0;flex:1 1 130px}#who,#status{white-space:nowrap;flex:none}#who{max-width:128px;overflow:hidden;text-overflow:ellipsis;display:inline-block;line-height:1.6}
+.nav button{position:relative}
+.nav .bd{position:absolute;top:0;left:calc(50% + 6px);background:var(--c-disp);color:#fff;border-radius:99px;font-size:10px;font-weight:800;min-width:17px;height:17px;line-height:17px;padding:0 5px;text-align:center}
+@media(max-width:819px){.nav{overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav button{flex:1 0 auto;min-width:64px;padding:6px 8px}}
+.en{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c-disp);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--shadow)}
+.en.late{border-left-color:var(--c-baja)}.en.today{border-left-color:var(--ok)}.en.done{border-left-color:var(--line);opacity:.88}
+.en .eh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.en .eg{font-weight:800;font-size:16px;min-width:0;overflow-wrap:anywhere}
+.en .eq{font-weight:800;font-size:28px;line-height:1;text-align:right;font-variant-numeric:tabular-nums}
+.en .eq small{display:block;font-size:11px;font-weight:700;color:var(--ink2);margin-top:3px}
+.en .ed{font-size:13px;color:var(--ink2);margin:6px 0 12px;overflow-wrap:anywhere}
+.en .ew{font-weight:800;font-size:12px;letter-spacing:.04em;color:var(--c-disp)}
+.en.late .ew{color:var(--bad)}.en.today .ew{color:var(--ok)}.en.done .ew{color:var(--ok)}
+.pk{position:fixed;inset:0;z-index:300;background:rgba(10,20,14,.55);display:flex;align-items:flex-end;justify-content:center}
+.pk .box{background:#fff;color:#1c2a20;width:100%;max-width:520px;max-height:72vh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+.pk .ttl{padding:16px 20px 10px;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#56655a}
+.pk .lst{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.pk .it{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;background:#fff;color:#1c2a20;border:0;border-top:1px solid #dfe6d9;padding:14px 20px;min-height:54px;font-size:17px;font-weight:500;cursor:pointer}
+.pk .it.on{background:#dff0e4;color:#14522b;font-weight:800}
+.pk .it .ck{font-weight:800;color:#1f6b3a}
+.pk .cx{background:#eef2ea;color:#1c2a20;border:0;border-top:1px solid #dfe6d9;padding:14px;font-size:16px;font-weight:800;min-height:52px;cursor:pointer}
+</style>
+
+<header>
+ <div class="wrap">
+  <div class="hrow">
+   <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M12 11c0-4 3-6 7-6 0 4-3 6-7 6Z"/><path d="M12 14c0-3-2-5-6-5 0 3 2 5 6 5Z"/></svg></div>
+   <div class="brand">ESQUEJES MARUJO<small>Control de clones · stock y movimientos</small></div>
+   <div class="spacer"></div>
+   <button class="pill" id="who" type="button" title="Quién está cargando">👤 …</button>
+   <button class="pill" id="status" type="button">Conectando…</button>
+  </div>
+  <nav class="nav" id="nav" aria-label="Secciones">
+   <button data-v="inicio" class="on"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/></svg>Inicio</button>
+   <button data-v="cargar"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Cargar</button>
+   <button data-v="entregas"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>Entregas<span class="bd" id="en_bd" style="display:none"></span></button>
+   <button data-v="stock"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4Z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Stock</button>
+   <button data-v="germ"><svg viewBox="0 0 24 24"><path d="M12 21v-9"/><path d="M12 12C12 8 9 6 5 6c0 4 3 6 7 6Z"/><path d="M12 14c0-3 2-5 6-5 0 3-2 5-6 5Z"/></svg>Germinación</button>
+   <button data-v="cloneras"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Cloneras</button>
+   <button data-v="historial"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Historial</button>
+   <button data-v="listas"><svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>Listas</button>
+  </nav>
+ </div>
+</header>
+
+<main class="wrap">
+ <div id="banners"></div>
+
+ <section class="view on" id="v-inicio"></section>
+
+ <section class="view" id="v-cargar">
+  <h2>¿Qué querés registrar?</h2>
+  <div class="tiles" id="tiles">
+   <button class="tile" data-f="entrada" type="button"><div class="ic">+</div><b>Entrada</b><span>Clones que ingresan, por litraje</span></button>
+   <button class="tile" data-f="trasplante" type="button"><div class="ic">↗</div><b>Trasplante / muertes</b><span>Pasar de litraje o dar de baja por muerte</span></button>
+   <button class="tile" data-f="sala" type="button"><div class="ic">▣</div><b>Asignar a sala</b><span>Reservar para MB o 420 (no se vende)</span></button>
+   <button class="tile" data-f="salida" type="button"><div class="ic">⇥</div><b>Dispensa / baja</b><span>Entrega programada o baja de clones</span></button>
+  </div>
+  <div class="card" id="formcard" style="margin-top:14px;display:none">
+   <!-- ENTRADA -->
+   <form id="f-entrada" autocomplete="off">
+    <div class="fgrid">
+     <label class="f">Fecha<span class="in"><input type="date" id="e_fecha" required></span></label>
+     <label class="f">Tipo de entrada<span class="in"><select id="e_tipo"></select></span></label>
+     <label class="f">Clonera <span class="hint" style="display:inline">(solo para clones)</span><span class="in"><select id="e_clonera"></select></span></label>
+     <label class="f">Genética<span class="in"><select id="e_gen"></select></span>
+       <span class="in" id="e_gnew_w" style="display:none"><input type="text" id="e_gnew" placeholder="Nombre de la nueva genética"></span></label>
+     <label class="f">Madre # <span class="hint" style="display:inline">(opcional)</span><span class="in"><input type="text" id="e_madre" inputmode="numeric" placeholder="Ej: 1"></span></label>
+     <label class="f">Generación <span class="hint" style="display:inline">(opcional)</span><span class="in"><select id="e_genr"></select></span></label>
+     <label class="f">Litraje de entrada<span class="in"><select id="e_lit"></select></span></label>
+     <label class="f">Cantidad<span class="in"><input type="number" id="e_cant" inputmode="numeric" min="0" max="5000" step="1" placeholder="0 a 5000"></span></label>
+     <label class="f">Origen / proveedor<span class="in"><select id="e_origen"></select></span><span class="in" id="e_orinew_w" style="display:none"><input type="text" id="e_orinew" placeholder="Nuevo origen / proveedor"></span></label>
+     <label class="f full">Notas<span class="in"><textarea id="e_notas" placeholder="Opcional"></textarea></span></label>
+    </div>
+    <button type="button" class="chip" id="e_fill" style="display:none;margin:10px 0 0"></button>
+    <div class="hint" id="e_hint" style="margin:10px 0"></div>
+    <button class="btn primary big" type="submit">Guardar entrada</button>
+    <div class="msg" id="e_msg"></div>
+   </form>
+   <!-- TRASPLANTE -->
+   <form id="f-trasplante" autocomplete="off">
+    <div class="fgrid">
+     <label class="f">Fecha<span class="in"><input type="date" id="t_fecha"></span></label>
+     <label class="f">Lote y litraje de origen<span class="in"><select id="t_bk"></select></span><span class="hint" id="t_hint"></span></label>
+     <label class="f">Cantidad trasplantada<span class="in"><input type="number" id="t_cant" inputmode="numeric" min="0" step="1" placeholder="0"></span></label>
+     <label class="f">Pasa a litraje<span class="in"><select id="t_dest"></select></span></label>
+     <label class="f">Bajas por muerte<span class="in"><input type="number" id="t_mue" inputmode="numeric" min="0" step="1" placeholder="0"></span><span class="hint">Se descuentan del lote en el litraje de origen, en todas las pantallas.</span></label>
+     <label class="f full">Notas<span class="in"><textarea id="t_notas" placeholder="Opcional"></textarea></span></label>
+    </div>
+    <div class="hint" id="t_res" style="margin:10px 0"></div>
+    <button class="btn primary big" type="submit">Guardar trasplante</button>
+    <div class="msg" id="t_msg"></div>
+   </form>
+   <!-- SALA -->
+   <form id="f-sala" autocomplete="off">
+    <div class="fgrid">
+     <label class="f full">Sala
+      <span class="in seg"><label><input type="radio" name="s_sala" value="MB" checked><span>MB</span></label><label><input type="radio" name="s_sala" value="420"><span>420</span></label></span></label>
+     <label class="f">Fecha<span class="in"><input type="date" id="s_fecha"></span></label>
+     <label class="f">Lote y litraje<span class="in"><select id="s_bk"></select></span><span class="hint" id="s_hint"></span></label>
+     <label class="f">Cantidad a asignar<span class="in"><input type="number" id="s_cant" inputmode="numeric" min="0" step="1" placeholder="0"></span></label>
+     <label class="f full">Notas<span class="in"><textarea id="s_notas" placeholder="Opcional"></textarea></span></label>
+    </div>
+    <div class="hint" id="s_res" style="margin:10px 0"></div>
+    <button class="btn primary big" type="submit">Asignar a la sala</button>
+    <div class="msg" id="s_msg"></div>
+   </form>
+   <!-- SALIDA -->
+   <form id="f-salida" autocomplete="off">
+    <div class="fgrid">
+     <label class="f full">Destino
+      <span class="in seg"><label><input type="radio" name="x_dest" value="DISPENSA" checked><span>Entrega a dispensa</span></label><label><input type="radio" name="x_dest" value="BAJA"><span>Baja</span></label></span></label>
+     <label class="f">Fecha de entrega programada<span class="in"><input type="date" id="x_fecha"></span></label>
+     <label class="f">Lote y litraje (solo CLON y 300 CM3)<span class="in"><select id="x_bk"></select></span><span class="hint" id="x_hint"></span></label>
+     <label class="f">Cantidad<span class="in"><input type="number" id="x_cant" inputmode="numeric" min="0" step="1" placeholder="0"></span></label>
+     <label class="f">Socio<span class="in"><select id="x_socio"></select></span><span class="in" id="x_socnew_w" style="display:none"><input type="text" id="x_socnew" placeholder="Nombre del nuevo socio"></span></label>
+     <label class="f">Motivo de baja<span class="in"><select id="x_mot"></select></span><span class="in" id="x_motnew_w" style="display:none"><input type="text" id="x_motnew" placeholder="Nuevo motivo de baja"></span></label>
+     <label class="f full">Notas<span class="in"><textarea id="x_notas" placeholder="Opcional"></textarea></span></label>
+    </div>
+    <div class="hint" id="x_res" style="margin:10px 0"></div>
+    <button class="btn primary big" type="submit">Guardar</button>
+    <div class="msg" id="x_msg"></div>
+   </form>
+  </div>
+ </section>
+
+ <section class="view" id="v-entregas"></section>
+
+ <section class="view" id="v-germ">
+  <div id="g_kpis"></div>
+  <div style="margin:12px 0"><button class="btn primary big" id="g_new" type="button">+ Nueva siembra de semillas</button></div>
+  <div class="card" id="g_form" style="display:none;margin-bottom:14px">
+   <h2 id="g_title" style="margin:0 0 4px"></h2><div class="hint" id="g_ctx" style="margin:0 0 12px"></div>
+   <form id="f-germ" class="on" autocomplete="off">
+    <div class="fgrid">
+     <label class="f" data-m="siembra germino perdida pasar">Fecha<span class="in"><input type="date" id="g_fecha"></span></label>
+     <label class="f" data-m="siembra">Genética<span class="in"><select id="g_gen"></select></span><span class="in" id="g_gnew_w" style="display:none"><input type="text" id="g_gnew" placeholder="Nombre de la nueva genética"></span></label>
+     <label class="f" data-m="siembra">Banco de semillas<span class="in"><select id="g_banco"></select></span><span class="in" id="g_bnew_w" style="display:none"><input type="text" id="g_bnew" placeholder="Nombre del nuevo banco"></span></label>
+     <label class="f" data-m="siembra">Cantidad de semillas<span class="in"><input type="number" id="g_sem" inputmode="numeric" min="1" max="5000" step="1" placeholder="1 a 5000"></span></label>
+     <label class="f" data-m="germino perdida pasar"><span id="g_cl">Cantidad</span><span class="in"><input type="number" id="g_cant" inputmode="numeric" min="1" step="1" placeholder="0"></span></label>
+     <label class="f" data-m="pasar">Pasa a litraje<span class="in"><select id="g_lit"></select></span></label>
+     <label class="f full" data-m="siembra germino perdida pasar">Notas<span class="in"><textarea id="g_notas" placeholder="Opcional"></textarea></span></label>
+    </div>
+    <div class="hint" id="g_hint" style="margin:10px 0"></div>
+    <button class="btn primary big" type="submit">Guardar</button>
+    <button class="btn" type="button" id="g_cancel" style="width:100%;margin-top:8px">Cancelar</button>
+    <div class="msg" id="g_msg"></div>
+   </form>
+  </div>
+  <div class="msg" id="g_lmsg"></div>
+  <div id="g_list"></div>
+ </section>
+
+ <section class="view" id="v-cloneras">
+  <div class="card" id="c_load" style="margin-bottom:14px">
+   <div class="clh"><b>Cargar clones</b><span class="spacer"></span><button class="btn sm" id="c_close" type="button" style="display:none">Cerrar</button></div>
+   <div id="c_slot"></div>
+   <button class="btn primary big" id="c_open" type="button">+ Cargar clones en una clonera</button>
+  </div>
+  <div class="msg" id="c_msg"></div>
+  <div class="filters" style="margin-bottom:8px"><button class="chip" id="c_big" type="button">Ver detalle en cada cuadrado</button></div>
+  <div id="c_list"></div>
+  <div class="card" id="c_add" style="margin-top:6px">
+   <div class="clh"><b>Agregar clonera</b></div>
+   <div class="addrow"><input type="text" id="ca_n" placeholder="Nombre (ej: CLONERA 3)" maxlength="40" autocomplete="off"><select id="ca_t" style="width:auto"><option value="6x12">6×12 · 72 lugares</option><option value="5x10">5×10 · 50 lugares</option></select></div>
+   <button class="btn primary" id="ca_go" type="button" style="margin-top:8px">Agregar clonera</button>
+  </div>
+ </section>
+
+ <section class="view" id="v-stock">
+  <div class="filters">
+   <input type="text" id="k_q" placeholder="Buscar genética, lote o madre…">
+   <select id="k_gen"></select>
+   <label class="chip" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="k_nz" checked> Solo con stock</label>
+  </div>
+  <div class="filters" id="k_lits"></div>
+  <div class="legend"><span><b style="background:var(--ink2)"></b>Inventario = entradas + trasplantes − muertes − entregas realizadas</span><span><b style="background:var(--c-sala)"></b>Asignado a MB / 420</span><span><b style="background:var(--c-tr)"></b>Para venta</span><span><b style="background:var(--c-disp)"></b>Entregas y bajas programadas</span><span><b style="background:var(--c-in)"></b>Para ofrecer</span></div>
+  <div id="k_list" class="stock"></div>
+ </section>
+
+ <section class="view" id="v-historial">
+  <div class="filters" id="h_f"></div>
+  <p class="hint" style="margin:0 0 8px">Nada se borra. Lo anulado se ve tachado y lo corregido muestra quién lo hizo, cuándo, el motivo y qué cambió.</p>
+  <div class="card" style="padding:4px 16px"><ul class="feed" id="h_list"></ul></div>
+  <div class="msg" id="h_msg"></div>
+ </section>
+
+ <section class="view" id="v-listas">
+  <p class="hint" style="margin:0 0 12px">Todo lo que se elige en los formularios sale de estas listas. Lo que agregues acá queda disponible al instante para los tres socios.</p>
+  <div id="l_wrap" class="grid2"></div>
+  <h2>Capacidades y plazo</h2>
+  <form class="card" id="a_form" style="display:block;margin-top:0">
+   <div class="fgrid">
+    <label class="f">Sala MB (plantas)<span class="in"><input type="number" id="l_cmb" min="0" step="1"></span></label>
+    <label class="f">Sala 420 (plantas)<span class="in"><input type="number" id="l_c420" min="0" step="1"></span></label>
+    <label class="f">Plazo de clon en clonera (días)<span class="in"><input type="number" id="l_plazo" min="0" max="120" step="1"></span><span class="hint">Pasado este plazo el lote se marca en rojo. 0 = sin alerta.</span></label>
+   </div>
+   <p class="hint">Valores de ejemplo hasta que los confirmen.</p>
+   <button class="btn primary" type="submit">Guardar</button>
+   <div class="msg" id="a_msg"></div>
+  </form>
+  <h2>Controles</h2>
+  <div class="card" id="a_ctl"></div>
+  <h2>Exportar</h2>
+  <div class="card">
+   <p style="margin:0 0 10px;color:var(--ink2);font-size:14px">Baja todo el registro en un Excel: stock por lote y litraje, entradas, trasplantes, asignaciones y salidas, con lo anulado y corregido (quién, cuándo y por qué) en la hoja HISTORIAL DE CAMBIOS.</p>
+   <button class="btn primary" id="a_xlsx" type="button">Descargar Excel</button>
+   <button class="btn" id="a_csv" type="button">Descargar stock (CSV)</button>
+   <div class="msg" id="a_xmsg"></div>
+  </div>
+   </section>
+</main>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="mbox"><h3 id="m_t"></h3><p id="m_p" class="hint" style="margin:0 0 12px"></p><div id="m_b"></div><div class="msg" id="m_e"></div><div class="gact"><button class="btn" id="m_no" type="button">Cancelar</button><button class="btn primary" id="m_ok" type="button">Aceptar</button></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(function(){
+"use strict";
+const LIT=["CLON","300 CM3","1 LITRO","5 LITROS","10 LITROS"];
+const OFERT=["CLON","300 CM3"];
+const COLS=["entradas","trasplantes","asignaciones","salidas","germinaciones","germ_ev"];
+const DEF={
+  socios:["SOCIO 1","SOCIO 2","SOCIO 3"],
+  bancos:["BANCO 1","BANCO 2","BANCO 3"],
+  geneticas:["RC5","LSD","GORILA SKUNK","LEMON ORANGE","PIÑA","FROSTED FLAKE","BB X GARY PAYTON","PLATINUM BIRD"],
+  cloneraDefs:[{n:"CLONERA 1",f:6,c:12},{n:"CLONERA 2",f:5,c:10}],
+  origenes:["PROPIO (PLANTA MADRE)","PROVEEDOR 1","PROVEEDOR 2","PROVEEDOR 3"],
+  tipos:["ESQUEJADO","COMPRA","INTERCAMBIO"],
+  motivos:["MUERTE / NO ENRAIZÓ","PLAGA","HONGO","HERMAFRODITA","DESCARTE CALIDAD","OTRO"],
+  capMB:150,cap420:150,plazoClon:14
+};
+const S={entradas:[],trasplantes:[],asignaciones:[],salidas:[],germinaciones:[],germ_ev:[]};
+const SA={entradas:[],trasplantes:[],asignaciones:[],salidas:[],germinaciones:[],germ_ev:[]};
+let opName=(()=>{try{return localStorage.getItem("opName")||""}catch(e){return ""}})();
+let myUid=null,corr=null;
+const nextLote=()=>SA.entradas.reduce((m,e)=>Math.max(m,e.n||0),0)+1;
+const ageDays=f=>{const d=Math.round((new Date(today())-new Date(f))/864e5);return isNaN(d)?0:Math.max(0,d)};
+function effS(){if(!corr)return S;const o=Object.assign({},S);o[corr.coll]=S[corr.coll].filter(r=>r.id!==corr.id);return o}
+let cfg=Object.assign({},DEF);
+let db=null,canWrite=true,loaded={},dbErr=null,view="inicio",form=null,hFilter="todo";
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad=n=>String(n).padStart(4,"0");
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const fdate=s=>{if(!s)return"—";const p=s.split("-");return p.length===3?p[2]+"/"+p[1]+"/"+p[0].slice(2):s};
+const int=v=>{const n=Number(v);return v!==""&&v!=null&&Number.isInteger(n)?n:NaN};
+const toast=(m)=>{const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("on"),2600)};
+const say=(id,txt,kind)=>{const m=$(id);m.textContent=txt;m.className="msg on "+kind;};
+const clearMsg=id=>{$(id).className="msg"};
+
+/* ---------- cálculo (mismas reglas del Excel) ---------- */
+function compute(D){
+  const B=new Map();
+  const g=(l,t)=>{const k=l+"|"+t;if(!B.has(k))B.set(k,{k,lote:l,lit:t,init:0,tin:0,tout:0,mue:0,mb:0,s420:0,disp:0,dispHoy:0,baja:0,ent:0});return B.get(k)};
+  const td=today();
+  const ent=new Map(D.entradas.map(e=>[e.id,e]));
+  D.entradas.forEach(e=>{g(e.id,e.litraje).init+=+e.cantidad||0});
+  D.trasplantes.forEach(t=>{const o=g(t.lote,t.desde);o.tout+=+t.cantidad||0;o.mue+=+t.muertes||0;if((+t.cantidad||0)>0)g(t.lote,t.hasta).tin+=+t.cantidad});
+  D.asignaciones.forEach(a=>{const b=g(a.lote,a.litraje);if(a.sala==="MB")b.mb+=+a.cantidad||0;else b.s420+=+a.cantidad||0});
+  D.salidas.forEach(s=>{const b=g(s.lote,s.litraje),q=+s.cantidad||0;if(s.destino==="BAJA")b.baja+=q;else if(s.entregado)b.ent+=q;else{b.disp+=q;if(s.fecha<=td)b.dispHoy+=q}});
+  const arr=[...B.values()];
+  const tot={inv:0,mb:0,s420:0,venta:0,ofrecer:0,disp:0,baja:0,mue:0,porLit:{}};
+  LIT.forEach(l=>tot.porLit[l]={inv:0,of:0});
+  const viol=[];
+  arr.forEach(b=>{
+    const e=ent.get(b.lote);b.e=e||null;b.n=e?e.n:999999;b.code=e?"L"+pad(e.n):"L????";
+    b.inv=b.init+b.tin-b.tout-b.mue-b.ent;b.venta=b.inv-b.mb-b.s420;b.libre=b.venta-b.disp-b.baja;
+    b.ofertable=OFERT.includes(b.lit);b.ofrecer=b.ofertable?b.libre:0;
+    b.name=e?e.genetica+(e.madre?" #"+e.madre:""):"(lote borrado)";
+    if(b.inv<0||b.libre<0)viol.push(b.k+"\tquedaría stock negativo en "+b.code+" · "+b.name+" · "+b.lit);
+    tot.inv+=b.inv;tot.mb+=b.mb;tot.s420+=b.s420;tot.venta+=b.venta;if(b.ofertable)tot.ofrecer+=b.libre;
+    tot.disp+=b.disp;tot.baja+=b.baja+b.mue;tot.mue+=b.mue;
+    if(tot.porLit[b.lit]){tot.porLit[b.lit].inv+=b.inv;if(b.ofertable)tot.porLit[b.lit].of+=b.libre}
+  });
+  arr.sort((a,b)=>a.n-b.n||LIT.indexOf(a.lit)-LIT.indexOf(b.lit));
+  const plazo=+cfg.plazoClon>0?+cfg.plazoClon:0;
+  const cl=(cfg.cloneraDefs||[]).map(d=>{const cap=d.f*d.c;
+    const lots=arr.filter(b=>b.lit==="CLON"&&b.e&&b.e.clonera===d.n).map(b=>({code:b.code,name:b.name,gen:b.e.genetica,madre:b.e.madre||"",n:b.n,q:Math.max(0,b.inv-b.baja-b.dispHoy),age:ageDays(b.e.fecha),late:plazo>0&&ageDays(b.e.fecha)>plazo})).filter(x=>x.q>0).sort((a,b)=>a.n-b.n);
+    const occ=lots.reduce((a,x)=>a+x.q,0);return {def:d,cap,occ,libres:cap-occ,lots,late:lots.filter(x=>x.late).reduce((a,x)=>a+x.q,0)}});
+  cl.forEach(c=>{if(c.occ>c.cap)viol.push("CL|"+c.def.n+"\tla clonera "+c.def.n+" quedaría sobre su capacidad ("+c.occ+" de "+c.cap+")")});
+  const ge=D.germ_ev||[],gm=D.germinaciones||[];
+  const gs=gm.map(g=>{const evs=ge.filter(x=>x.germ===g.id);const sum=t=>evs.filter(x=>x.tipo===t).reduce((a,x)=>a+(+x.cantidad||0),0);
+    const lotes=D.entradas.filter(x=>x.germ===g.id);const germ=sum("GERMINO"),perd=sum("PERDIDA"),pas=lotes.reduce((a,x)=>a+(+x.cantidad||0),0),sem=+g.semillas||0;
+    return {g,id:g.id,sem,germ,perd,pas,pend:germ-perd-pas,cerrada:evs.some(x=>x.tipo==="CIERRE"),lotes,label:g.genetica+" · "+g.banco+" ("+fdate(g.fecha)+")"}});
+  gs.forEach(x=>{if(x.germ>x.sem)viol.push("GM|"+x.id+"\tlas germinadas ("+x.germ+") superan las semillas ("+x.sem+") de "+x.label);if(x.pend<0)viol.push("GM|"+x.id+"\tquedarían más plantines pasados o perdidos que germinados en "+x.label)});
+  return {buckets:arr,tot,viol,ent,cl,gs};
+}
+let C=compute(S);
+const bkLabel=b=>b.code+" · "+b.name+" · "+b.lit+" · libre "+b.libre;
+
+/* ---------- escritura con validación ---------- */
+
+const keysOf=(coll,r)=>coll==="entradas"?["CL|"+r.clonera].concat(r.germ?["GM|"+r.germ]:[]):coll==="germ_ev"?["GM|"+r.germ]:coll==="germinaciones"?["GM|"+r.id]:[r.lote+"|"+(r.desde||r.litraje),r.lote+"|"+(r.hasta||r.litraje)];
+const META=["id","rev","ts","por","uid","ejemplo","anulado","anuladoTs","anuladoPor","anuladoUid","anuladoMotivo","entregadoTs","entregadoPor"];
+const stripMeta=o=>{const r={};Object.keys(o).forEach(k=>{if(!META.includes(k))r[k]=o[k]});return r};
+const FL={fecha:"Fecha",cantidad:"Cantidad",genetica:"Genética",madre:"Madre",gen:"Generación",litraje:"Litraje",clonera:"Clonera",origen:"Origen",tipo:"Tipo",notas:"Notas",desde:"Desde",hasta:"Hasta",muertes:"Muertes",sala:"Sala",destino:"Destino",socio:"Socio",motivo:"Motivo de baja",semillas:"Semillas",banco:"Banco",entregado:"Entregada",lote:"Lote"};
+const lotLabel=id=>{const x=SA.entradas.find(e=>e.id===id);return x?"L"+pad(x.n):"?"};
+const fv=(k,v)=>k==="entregado"?(v?"sí":"no"):k==="fecha"?fdate(v):k==="lote"?lotLabel(v):(v===undefined||v===null||v==="")?"(vacío)":String(v);
+function diffText(a,b){
+  const ks=[...new Set(Object.keys(a).concat(Object.keys(b)))].filter(k=>k!=="n"&&k!=="germ");const out=[];
+  ks.forEach(k=>{const x=a[k],y=b[k];const same=k==="entregado"?!!x===!!y:String(x==null?"":x)===String(y==null?"":y);if(!same)out.push((FL[k]||k)+": "+fv(k,x)+" → "+fv(k,y))});
+  return out.join(" · ")||"sin cambios de datos";
+}
+const p2=n=>String(n).padStart(2,"0");
+const fdt=t=>{if(!t)return"—";const d=new Date(t);return p2(d.getDate())+"/"+p2(d.getMonth()+1)+" "+p2(d.getHours())+":"+p2(d.getMinutes())};
+const hmsg=(t,k)=>{if(view==="historial")say("h_msg",t,k);else toast(t)};
+
+/* ---------- ventana modal, identidad ---------- */
+function askModal(o){return new Promise(res=>{
+  const m=$("modal");$("m_t").textContent=o.title;$("m_p").textContent=o.msg||"";$("m_b").innerHTML=o.body;$("m_e").className="msg";
+  $("m_ok").textContent=o.ok||"Aceptar";$("m_ok").className="btn "+(o.danger?"danger":"primary");$("m_no").style.display=o.noCancel?"none":"";
+  m.classList.add("on");if(o.init)o.init();
+  const done=v=>{m.classList.remove("on");$("m_ok").onclick=null;$("m_no").onclick=null;res(v)};
+  $("m_no").onclick=()=>done(null);
+  $("m_ok").onclick=()=>{const v=o.get();if(v&&v.err){say("m_e",v.err,"bad");return}done(v)};
+  const f=$("m_b").querySelector("textarea,select,input");if(f)setTimeout(()=>f.focus(),50);
+})}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("modal").classList.contains("on")&&$("m_no").style.display!=="none")$("m_no").click()});
+const askMotivo=(title,msg,ok,danger)=>askModal({title,msg,ok,danger,body:'<label class="f">Motivo (obligatorio)<span class="in"><textarea id="m_motivo" placeholder="Ej: cargué 30 y eran 20 / lote equivocado"></textarea></span></label>',get:()=>{const v=$("m_motivo").value.trim().replace(/\s+/g," ");return v.length<4?{err:"Escribí el motivo (unas palabras): queda registrado en el historial."}:v}});
+function whoModal(cancelable){
+  const list=(cfg.socios||[]).slice();
+  return askModal({title:"¿Quién está cargando?",msg:"Queda registrado en cada movimiento que cargues, corrijas o anules. Se recuerda en este dispositivo.",ok:"Guardar",noCancel:!cancelable,
+    body:'<label class="f">Tu nombre<span class="in"><select id="m_who"><option value="">Elegí…</option>'+list.map(x=>'<option>'+esc(x)+'</option>').join("")+'<option value="__o__">Otro…</option></select></span></label><span class="in" id="m_whon" style="display:none;margin-top:8px"><input type="text" id="m_who2" maxlength="40" placeholder="Escribí tu nombre"></span>',
+    init:()=>{$("m_who").value=opName&&list.includes(opName)?opName:"";$("m_who").onchange=()=>{$("m_whon").style.display=$("m_who").value==="__o__"?"block":"none"}},
+    get:()=>{const v=$("m_who").value==="__o__"?$("m_who2").value.trim().toUpperCase().replace(/\s+/g," "):$("m_who").value;return v?v:{err:"Elegí tu nombre: sin eso no se puede registrar quién cargó."}}});
+}
+function setOp(v){opName=v;try{localStorage.setItem("opName",v)}catch(e){}updateWho()}
+function updateWho(){const w=$("who");if(!w)return;w.textContent="👤 "+(opName||"¿Quién sos?");w.className="pill"+(opName?"":" warn")}
+async function ensureOp(){if(opName)return opName;const v=await whoModal(false);if(v)setOp(v);return opName}
+async function pickOp(){const v=await whoModal(true);if(v)setOp(v)}
+
+/* ---------- escritura con validación ---------- */
+function explain(e){
+  const c=e&&e.code;
+  if(c==="invalid_argument")return "No se pudo guardar: tu usuario no tiene permiso de escritura (pedí acceso de Colaborador).";
+  if(c==="quota_exceeded")return "La base llegó a su límite de documentos.";
+  return "No se pudo guardar ("+(c||"error")+"). Probá de nuevo.";
+}
+async function freshData(){const D={};for(const c of COLS){const q=await db.collection(c).get();D[c]=q.docs.map(d=>Object.assign({id:d.id},d.data())).filter(r=>!r.anulado)}return D}
+const whereNeg=v=>v.split("\t")[1];
+function endCorr(){corr=null;["f-entrada","f-trasplante","f-sala","f-salida","f-germ"].forEach(i=>$(i).reset());$("g_form").style.display="none";germMode=null;germTarget=null;dupOK="";refresh()}
+async function commit(coll,data,msgId){
+  if(!db){say(msgId,"Sin conexión a la base de datos.","bad");return false}
+  if(!canWrite){say(msgId,"Tu usuario es solo lectura: pedí acceso de Colaborador.","bad");return false}
+  if(busy)return false;
+  const who=await ensureOp();
+  if(!who){say(msgId,"Para guardar tenés que decir quién sos: queda registrado en el historial.","bad");return false}
+  busy=true;applyBtns();
+  try{
+    let D;try{D=await freshData()}catch(e){D=S}
+    const base=compute(D);
+    if(data.lote!==undefined&&!D.entradas.some(e=>e.id===data.lote)){say(msgId,"Bloqueado: ese lote ya no existe o fue anulado.","bad");return false}
+    if(corr&&corr.coll===coll){
+      const orig=D[coll].find(r=>r.id===corr.id);
+      if(!orig){say(msgId,"Ese movimiento ya fue anulado o cambió. Cancelá la corrección y abrilo de nuevo.","bad");return false}
+      const doc=Object.assign({},orig,data,{ts:orig.ts,rev:(orig.rev||[]).concat([{ts:Date.now(),por:who,uid:myUid||"",motivo:corr.motivo,antes:stripMeta(orig)}])});
+      if(coll==="entradas")doc.n=orig.n;
+      const D2=Object.assign({},D,{[coll]:D[coll].map(r=>r.id===orig.id?doc:r)});
+      const tk=keysOf(coll,orig).concat(keysOf(coll,doc));
+      const nuevos=compute(D2).viol.filter(v=>!base.viol.includes(v)||tk.some(k=>v.startsWith(k+"\t")));
+      if(nuevos.length){say(msgId,"Bloqueado: "+whereNeg(nuevos[0])+".","bad");return false}
+      const body=Object.assign({},doc);delete body.id;
+      await db.doc(coll+"/"+orig.id).set(body);
+      endCorr();go("historial");toast("Corregido: el original queda en el historial con tu motivo");
+      return true;
+    }
+    data.por=who;data.uid=myUid||"";
+    const ref=db.collection(coll).doc();
+    const D2=Object.assign({},D,{[coll]:D[coll].concat([Object.assign({id:ref.id},data)])});
+    const tk=keysOf(coll,Object.assign({id:ref.id},data));
+    const nuevos=compute(D2).viol.filter(v=>!base.viol.includes(v)||tk.some(k=>v.startsWith(k+"\t")));
+    if(nuevos.length){say(msgId,"Bloqueado: "+whereNeg(nuevos[0])+". Si recién otro socio movió este stock, volvé a elegir el lote.","bad");return false}
+    await ref.set(data);return true;
+  }catch(e){say(msgId,explain(e),"bad");return false}
+  finally{busy=false;applyBtns()}
+}
+async function annul(coll,id){
+  if(busy)return;
+  const r=SA[coll].find(x=>x.id===id);if(!r||r.anulado)return;
+  const who=await ensureOp();if(!who)return;
+  const motivo=await askMotivo("Anular movimiento","No se borra: queda en el historial como ANULADO, con tu nombre, la fecha y este motivo.","Anular",true);
+  if(!motivo)return;
+  if(busy)return;busy=true;
+  try{
+    let D;try{D=await freshData()}catch(e){D=S}
+    if(!D[coll].some(x=>x.id===id)){hmsg("Ese movimiento ya estaba anulado.","bad");return}
+    if(coll==="germinaciones"&&(D.germ_ev.some(x=>x.germ===id)||D.entradas.some(x=>x.germ===id))){hmsg("No se puede anular la siembra: ya tiene germinadas registradas o plantines pasados a inventario. Anulá esos movimientos primero.","bad");return}
+    const base=compute(D);
+    const D2=Object.assign({},D,{[coll]:D[coll].filter(x=>x.id!==id)});
+    const nuevos=compute(D2).viol.filter(v=>!base.viol.includes(v));
+    if(nuevos.length){hmsg(coll==="entradas"?"No se puede anular esta entrada: tiene trasplantes, asignaciones o salidas que dependen de ella. Anulá esos movimientos primero.":"No se puede anular: "+whereNeg(nuevos[0])+". Primero anulá los movimientos que dependen de este.","bad");return}
+    await db.doc(coll+"/"+id).update({anulado:true,anuladoTs:Date.now(),anuladoPor:who,anuladoUid:myUid||"",anuladoMotivo:motivo});
+    if(view==="historial")clearMsg("h_msg");toast("Movimiento anulado: queda en el historial");
+  }catch(e){hmsg(explain(e),"bad")}
+  finally{busy=false}
+}
+async function setEntrega(id,val){
+  const r=S.salidas.find(x=>x.id===id);if(!r||r.destino==="BAJA"||!canWrite)return;
+  const who=await ensureOp();if(!who)return;
+  let motivo="Entrega realizada";
+  if(!val){motivo=await askMotivo("Deshacer entrega","Vuelve a figurar como entrega programada y el cambio queda en el historial.","Deshacer");if(!motivo)return}
+  if(busy)return;busy=true;
+  try{
+    let D;try{D=await freshData()}catch(e){D=S}
+    const cur=D.salidas.find(x=>x.id===id);if(!cur){hmsg("Ese movimiento ya no está activo.","bad");return}
+    if(!!cur.entregado===!!val)return;
+    const nu=Object.assign({},cur,{entregado:!!val,entregadoTs:Date.now(),entregadoPor:who,rev:(cur.rev||[]).concat([{ts:Date.now(),por:who,uid:myUid||"",tipo:"ENTREGA",motivo,antes:stripMeta(cur)}])});
+    const base=compute(D),D2=Object.assign({},D,{salidas:D.salidas.map(x=>x.id===id?nu:x)});
+    const nuevos=compute(D2).viol.filter(v=>!base.viol.includes(v));
+    if(nuevos.length){hmsg("No se puede: "+whereNeg(nuevos[0])+".","bad");return}
+    delete nu.id;await db.doc("salidas/"+id).set(nu);
+    toast(val?"Entrega registrada":"Entrega deshecha");
+  }catch(e){hmsg(explain(e),"bad")}
+  finally{busy=false}
+}
+const sset=(id,v)=>{const el=$(id);v=v==null?"":String(v);if(el.tagName==="SELECT"&&v!==""&&![...el.options].some(o=>o.value===v||o.text===v)){const o=document.createElement("option");o.value=v;o.textContent=v;el.appendChild(o)}el.value=v};
+async function startCorr(coll,id){
+  const r=SA[coll].find(x=>x.id===id);if(!r||r.anulado||!canWrite)return;
+  if(coll==="entradas"&&r.germ)return hmsg("Este lote vino de una germinación: no se corrige acá. Anulalo y volvé a pasarlo desde Germinación.","bad");
+  if(coll==="germ_ev"&&r.tipo==="CIERRE")return;
+  const who=await ensureOp();if(!who)return;
+  const motivo=await askMotivo("Corregir movimiento","El original no se borra: queda en el historial con este motivo, tu nombre y qué cambió.","Continuar");
+  if(!motivo)return;
+  corr={coll,id,motivo,orig:r};
+  const rd=document.querySelector.bind(document);
+  if(coll==="germinaciones"||coll==="germ_ev"){
+    go("germ",true);refreshNow();
+    if(coll==="germinaciones"){setMode("siembra");$("g_title").textContent="Corregir siembra";sset("g_fecha",r.fecha);sset("g_gen",r.genetica);sset("g_banco",r.banco);sset("g_sem",r.semillas);sset("g_notas",r.notas)}
+    else{setMode(r.tipo==="GERMINO"?"germino":"perdida",r.germ);$("g_title").textContent="Corregir "+(r.tipo==="GERMINO"?"germinadas":"plantines perdidos");sset("g_fecha",r.fecha);sset("g_cant",r.cantidad);sset("g_notas",r.notas)}
+    liveG();refreshNow();return;
+  }
+  go("cargar",true);
+  if(coll==="entradas"){openForm("entrada");refreshNow();sset("e_fecha",r.fecha);sset("e_tipo",r.tipo);sset("e_lit",r.litraje);liveE();sset("e_clonera",r.clonera);sset("e_gen",r.genetica);sset("e_madre",r.madre);sset("e_genr",r.gen);sset("e_origen",r.origen);sset("e_notas",r.notas);sset("e_cant",r.cantidad);showNews();liveE()}
+  else if(coll==="trasplantes"){openForm("trasplante");refreshNow();sset("t_fecha",r.fecha);sset("t_bk",r.lote+"|"+r.desde);sset("t_cant",r.cantidad);sset("t_dest",(+r.cantidad>0)?r.hasta:"");sset("t_mue",r.muertes);sset("t_notas",r.notas);liveT()}
+  else if(coll==="asignaciones"){openForm("sala");refreshNow();rd('input[name=s_sala][value="'+r.sala+'"]').checked=true;sset("s_fecha",r.fecha);sset("s_bk",r.lote+"|"+r.litraje);sset("s_cant",r.cantidad);sset("s_notas",r.notas);liveS()}
+  else if(coll==="salidas"){openForm("salida");refreshNow();rd('input[name=x_dest][value="'+r.destino+'"]').checked=true;dest();sset("x_fecha",r.fecha);$("x_fecha").min="";sset("x_bk",r.lote+"|"+r.litraje);sset("x_cant",r.cantidad);if(r.destino==="BAJA")sset("x_mot",r.motivo);else sset("x_socio",r.socio);sset("x_notas",r.notas);liveX()}
+  refreshNow();
+}
+async function mergeCfg(fn){
+  const ref=db.doc("config/listas");let base=Object.assign({},cfg);
+  try{const q=await ref.get();if(q.exists)base=Object.assign({},DEF,q.data())}catch(e){}
+  await ref.set(fn(base));
+}
+async function addItems(pairs){
+  for(const p of pairs){if(p[1]&&!cfg[p[0]].includes(p[1])){try{await mergeCfg(b=>{b[p[0]]=(b[p[0]]||[]).includes(p[1])?b[p[0]]:(b[p[0]]||[]).concat([p[1]]);return b})}catch(e){}}}
+}
+
+/* ---------- vistas ---------- */
+const MV={germ:"GER",entrada:"ENT",trasplante:"TRA",sala:"SAL",dispensa:"DIS",baja:"BAJ"};
+function movements(live){
+  const e=new Map(SA.entradas.map(x=>[x.id,x]));
+  const nm=(l)=>{const x=e.get(l);return x?"L"+pad(x.n)+" · "+x.genetica+(x.madre?" #"+x.madre:""):"lote borrado"};
+  const out=[];
+  const gm0=new Map(SA.germinaciones.map(x=>[x.id,x]));
+  SA.germinaciones.forEach(x=>out.push({t:"germ",coll:"germinaciones",id:x.id,ts:x.ts||0,fecha:x.fecha,title:"Siembra · "+x.genetica+" · "+x.banco,desc:x.notas||"",q:"+"+x.semillas,qs:"semillas",ej:x.ejemplo}));
+  SA.germ_ev.forEach(x=>{const g=gm0.get(x.germ),nm=g?g.genetica+" · "+g.banco:"siembra borrada";const T={GERMINO:["Germinaron · ","+"+x.cantidad,"germinadas"],PERDIDA:["Plantines perdidos · ","−"+x.cantidad,"perdidos"],CIERRE:["Germinación cerrada · ","✓","sin más germinación"]}[x.tipo]||["Germinación · ","",""];
+    out.push({t:"germ",coll:"germ_ev",id:x.id,ts:x.ts||0,fecha:x.fecha,title:T[0]+nm,desc:x.notas||"",q:T[1],qs:T[2],ej:x.ejemplo})});
+  SA.entradas.forEach(x=>out.push({t:"entrada",coll:"entradas",id:x.id,ts:x.ts||0,fecha:x.fecha,title:"Entrada · "+x.genetica+(x.madre?" #"+x.madre:"")+" · "+x.litraje,desc:"L"+pad(x.n)+" · "+(x.tipo||"")+(x.clonera?" · "+x.clonera:"")+(x.origen?" · "+x.origen:"")+(x.notas?" · "+x.notas:""),q:"+"+x.cantidad,qs:"unid.",ej:x.ejemplo}));
+  SA.trasplantes.forEach(x=>{const m=+x.muertes||0,c=+x.cantidad||0;out.push({t:"trasplante",coll:"trasplantes",id:x.id,ts:x.ts||0,fecha:x.fecha,title:"Trasplante · "+nm(x.lote),desc:(c>0?c+" de "+x.desde+" a "+x.hasta:"Solo bajas en "+x.desde)+(m?" · "+m+" muertes":"")+(x.notas?" · "+x.notas:""),q:c>0?c+"":"−"+m,qs:c>0?(m?"+ "+m+" muertes":"movidos"):"muertes",ej:x.ejemplo});
+    if(m&&false){}});
+  SA.asignaciones.forEach(x=>out.push({t:"sala",coll:"asignaciones",id:x.id,ts:x.ts||0,fecha:x.fecha,title:"Asignado a "+x.sala+" · "+nm(x.lote),desc:x.litraje+(x.notas?" · "+x.notas:""),q:x.cantidad+"",qs:"a "+x.sala,ej:x.ejemplo}));
+  SA.salidas.forEach(x=>out.push({t:x.destino==="BAJA"?"baja":"dispensa",coll:"salidas",id:x.id,ts:x.ts||0,fecha:x.fecha,title:(x.destino==="BAJA"?"Baja · ":"Entrega a dispensa · ")+nm(x.lote),desc:x.litraje+(x.destino==="BAJA"?" · "+(x.motivo||""):" · "+(x.socio||""))+(x.notas?" · "+x.notas:""),q:"−"+x.cantidad,qs:x.destino==="BAJA"?"baja":"programado",ej:x.ejemplo}));
+  const idx={};COLS.forEach(c=>{idx[c]=new Map(SA[c].map(r=>[r.id,r]))});
+  out.forEach(m=>{m.raw=idx[m.coll].get(m.id)||{}});
+  return (live?out.filter(m=>!m.raw.anulado):out).sort((a,b)=>b.ts-a.ts);
+}
+function audHTML(r){
+  const revs=r.rev||[],cur=stripMeta(r),L=[];
+  L.push('<li>Cargó <b>'+esc(r.por||"sin dato")+'</b> · '+fdt(r.ts)+'</li>');
+  revs.forEach((v,i)=>{const nx=i<revs.length-1?revs[i+1].antes:cur;
+    L.push('<li><b>'+(v.tipo==="ENTREGA"?'Entrega':'Corregido')+'</b> por <b>'+esc(v.por||"sin dato")+'</b> · '+fdt(v.ts)+' · Motivo: '+esc(v.motivo)+'<br>'+esc(diffText(v.antes||{},nx))+'</li>')});
+  if(r.anulado)L.push('<li><b>ANULADO</b> por <b>'+esc(r.anuladoPor||"sin dato")+'</b> · '+fdt(r.anuladoTs)+' · Motivo: '+esc(r.anuladoMotivo||"")+'</li>');
+  return '<details class="aud"><summary>Ver quién, cuándo y qué cambió'+(revs.length?' ('+revs.length+')':'')+'</summary><ul>'+L.join("")+'</ul></details>';
+}
+function mvHTML(m,withAct){
+  const r=m.raw||{},an=!!r.anulado,revs=r.rev||[],edited=revs.some(v=>v.tipo!=="ENTREGA");
+  const tags=(an?'<span class="pill bad tag">ANULADO</span>':'')+(edited?'<span class="pill warn tag">CORREGIDO</span>':'')+(r.entregado&&!an?'<span class="pill ok tag">ENTREGADA</span>':'');
+  let acts="";
+  if(withAct&&canWrite&&!an){
+    const noCorr=(m.coll==="germ_ev"&&r.tipo==="CIERRE");
+    acts='<div class="act">'+(m.coll==="salidas"&&r.destino!=="BAJA"?(r.entregado?'<button class="btn sm" data-en="0|'+m.id+'" type="button">Deshacer entrega</button>':'<button class="btn sm primary" data-en="1|'+m.id+'" type="button">✔ Marcar entregada</button>'):'')+(noCorr?'':'<button class="btn sm" data-co="'+m.coll+'|'+m.id+'" type="button">Corregir</button>')+'<button class="btn sm danger" data-an="'+m.coll+'|'+m.id+'" type="button">Anular</button></div>';
+  }
+  return '<li class="mv'+(an?' an':'')+'"><div class="dot '+m.t+'">'+MV[m.t]+'</div><div class="t">'+esc(m.title)+tags+(m.ej?' <span class="pill warn" style="padding:1px 7px">ejemplo</span>':'')+'</div><div class="q '+m.t+'">'+esc(m.q)+'<small>'+esc(m.qs)+'</small></div><div class="d">'+fdate(m.fecha)+" · "+esc(m.desc)+(r.por?" · por "+esc(r.por):"")+'</div>'+((an||revs.length)&&withAct?audHTML(r):'')+acts+'</li>';
+}
+function dispTabla(){
+  const m=new Map();
+  C.buckets.forEach(b=>{if(!b.ofertable||b.ofrecer<=0||!b.e)return;const g=b.e.genetica;if(!m.has(g))m.set(g,{g,"CLON":0,"300 CM3":0});m.get(g)[b.lit]+=b.ofrecer});
+  const rows=[...m.values()].map(r=>Object.assign(r,{t:r["CLON"]+r["300 CM3"]})).sort((a,b)=>b.t-a.t||a.g.localeCompare(b.g));
+  if(!rows.length)return '<div class="card empty">No hay clones ni 300 cm³ libres para dispensa.</div>';
+  const c=(n,cls)=>'<div class="mc '+(cls||"")+(n===0?" z":"")+'">'+n+'</div>';
+  const tc=rows.reduce((a,r)=>a+r["CLON"],0),t3=rows.reduce((a,r)=>a+r["300 CM3"],0);
+  return '<div class="card mtx"><div class="mh"><div>Genética</div><div>CLON</div><div>300 CM3</div><div>Total</div></div>'+
+    rows.map(r=>'<div class="mr"><div class="mg">'+esc(r.g)+'</div>'+c(r["CLON"])+c(r["300 CM3"])+c(r.t,"tt")+'</div>').join("")+
+    '<div class="mr mf"><div class="mg">TOTAL</div>'+c(tc)+c(t3)+c(tc+t3,"tt")+'</div></div>';
+}
+function renderInicio(){
+  const t=C.tot,mv=movements(true);
+  const maxL=Math.max(1,...LIT.map(l=>C.tot.porLit[l].inv));
+  const bars=LIT.map(l=>{const p=t.porLit[l];return '<div class="bar"><div class="nm">'+l+'</div><div class="tr"><div class="fi" style="width:'+(p.inv/maxL*100)+'%"></div><div class="fi2" style="width:'+(Math.max(0,p.of)/maxL*100)+'%"></div></div><div class="v"><b>'+p.inv+'</b>'+(OFERT.includes(l)?' · '+p.of+' ofrec.':'')+'</div></div>'}).join("");
+  const room=(n,u,c)=>{const pc=c>0?Math.min(100,u/c*100):0;return '<div class="bar room'+(u>c?' over':'')+'"><div class="nm">'+n+'</div><div class="tr"><div class="fi2" style="width:'+pc+'%"></div></div><div class="v"><b>'+u+'</b> / '+c+'</div></div>'};
+  const td=today();
+  const ent=S.salidas.filter(s=>s.destino!=="BAJA"&&!s.entregado).slice().sort((a,b)=>(a.fecha<td)-(b.fecha<td)||(a.fecha<b.fecha?-1:1));
+  const lotes=new Map(S.entradas.map(x=>[x.id,x]));
+  const prox=ent.slice(0,6).map(s=>{const x=lotes.get(s.lote);const dd=Math.round((new Date(s.fecha)-new Date(td))/864e5);const when=isNaN(dd)?"":dd<0?"vencida":dd===0?"hoy":dd===1?"mañana":"en "+dd+" días";
+    return '<li class="mv"><div class="dot dispensa">DIS</div><div class="t">'+esc(x?x.genetica+(x.madre?" #"+x.madre:""):"lote borrado")+' · '+esc(s.litraje)+'</div><div class="q dispensa">−'+s.cantidad+'<small>'+esc(when)+'</small></div><div class="d">'+fdate(s.fecha)+' · '+esc(s.socio||"")+'</div>'+(canWrite?'<div class="act"><button class="btn sm primary" data-en="1|'+s.id+'" type="button">✔ Entregada</button></div>':'')+'</li>'}).join("");
+  const rec=mv.slice(0,6).map(m=>mvHTML(m,false)).join("");
+  const lateL=C.cl.flatMap(c=>c.lots.filter(l=>l.late).map(l=>Object.assign({cl:c.def.n},l)));
+  const lateH=lateL.length?'<div class="banner warn" style="margin-top:12px"><div class="grow"><b>⏰ Clones pasados del plazo ('+cfg.plazoClon+' días en clonera):</b> '+lateL.map(l=>esc(l.code+" "+l.gen+(l.madre?" #"+l.madre:""))+" — "+l.q+" u. · "+l.age+" días · "+esc(l.cl)).join("; ")+'. Trasplantalos o dalos de baja.</div></div>':"";
+  $("v-inicio").innerHTML=
+   '<div class="hero"><div><div class="lbl">DISPONIBLE PARA OFRECER</div><div class="num">'+t.ofrecer+'</div></div><div class="sub">Clones y 300 cm³ libres: sin asignar a sala ni comprometidos en entregas o bajas.</div></div>'+lateH+
+   '<h2 style="margin-top:18px">Genéticas disponibles para dispensa <span style="font-weight:500;text-transform:none;letter-spacing:0">(libres, por litraje)</span></h2>'+dispTabla()+
+   '<div class="kpis">'+
+    '<div class="kpi inv"><div class="l">Inventario</div><div class="n">'+t.inv+'</div><div class="s">todos los litrajes</div></div>'+
+    '<div class="kpi sala"><div class="l">Asignado a salas</div><div class="n">'+(t.mb+t.s420)+'</div><div class="s">MB '+t.mb+' · 420 '+t.s420+'</div></div>'+
+    '<div class="kpi venta"><div class="l">Stock para venta</div><div class="n">'+t.venta+'</div><div class="s">inventario − salas</div></div>'+
+    '<div class="kpi disp"><div class="l">Entregas programadas</div><div class="n">'+t.disp+'</div><div class="s">a dispensa</div></div>'+
+    '<div class="kpi baja"><div class="l">Bajas</div><div class="n">'+t.baja+'</div><div class="s">'+t.mue+' muertes · '+(t.baja-t.mue)+' otras</div></div>'+
+   '</div>'+
+   '<div class="grid2" style="margin-top:12px"><div><h2>Stock por litraje <span style="font-weight:500;text-transform:none;letter-spacing:0">(barra oscura = ofrecible)</span></h2><div class="card">'+bars+'</div>'+
+   '<h2>Capacidad de salas</h2><div class="card">'+room("Sala MB",t.mb,cfg.capMB)+room("Sala 420",t.s420,cfg.cap420)+'</div><h2>Cloneras (ocupación)</h2><div class="card">'+(C.cl.map(c=>room(c.def.n,c.occ,c.cap)).join("")||'<div class="empty">Definí tus cloneras en Listas.</div>')+'</div></div>'+
+   '<div><h2>Germinación</h2><div class="card">'+(C.gs.length?'<b>'+C.gs.filter(x=>!x.cerrada).length+'</b> siembras abiertas · <b>'+C.gs.reduce((a,x)=>a+Math.max(0,x.pend),0)+'</b> plantines para pasar a inventario':'<span style="color:var(--ink2)">Sin siembras todavía. Cargalas en la pestaña Germinación.</span>')+'</div><h2>Próximas entregas</h2><div class="card" style="padding:4px 16px">'+(prox?'<ul class="feed">'+prox+'</ul>':'<div class="empty">Sin entregas programadas.</div>')+'</div>'+
+   '<h2>Últimos movimientos</h2><div class="card" style="padding:4px 16px">'+(rec?'<ul class="feed">'+rec+'</ul>':'<div class="empty">Todavía no hay movimientos. Empezá por Cargar → Entrada.</div>')+'</div></div></div>';
+}
+function sx(l,n,cls){return '<div class="sx '+(cls||"")+(n===0?" zero":"")+(n<0?" neg":"")+'"><div class="l">'+l+'</div><div class="n">'+n+'</div></div>'}
+let clBig=(()=>{try{const v=localStorage.getItem("clBig");if(v!==null)return v==="1"}catch(e){}return false})();
+let clEditing=null;
+const climsg=(t,k)=>{lmsg("cloneras",t,k);say("c_msg",t,k==="ok"?"ok":"bad")};
+function colorFn(){
+  const order=[];S.entradas.slice().sort((a,b)=>a.n-b.n).forEach(e=>{const k=e.genetica+"|"+(e.madre||"");if(!order.includes(k))order.push(k)});
+  return (gen,madre)=>{const i=order.indexOf(gen+"|"+(madre||""));if(i<0)return"#666";return "hsl("+Math.round((i*137.508)%360)+",65%,"+(33+(i%2)*8)+"%)"};
+}
+const abbr=g=>{const w=g.split(/\s+/).filter(Boolean);return (w.length>1?w[0][0]+w[1][0]:g.slice(0,2)).toUpperCase()};
+function renderCloneras(){
+  $("c_big").classList.toggle("on",clBig);
+  if(!C.cl.length){$("c_list").innerHTML='<div class="card empty">Todavía no hay cloneras. Agregá una abajo (nombre y formato).</div>';return}
+  const col=colorFn();
+  $("c_list").innerHTML=C.cl.map(c=>{
+    const cells=[];c.lots.forEach(l=>{for(let i=0;i<l.q;i++)cells.push(l)});
+    let grid="";
+    for(let i=0;i<c.cap;i++){const l=cells[i];
+      if(!l){grid+='<div class="cell vac'+(clBig?' big':'')+'"></div>';continue}
+      const tip=l.gen+(l.madre?" · madre #"+l.madre:" · sin madre")+" · lote "+l.code+" · "+l.age+" días en clonera"+(l.late?" · PASÓ EL PLAZO":"");
+      grid+='<div class="cell'+(clBig?' big':'')+'" style="background:'+col(l.gen,l.madre)+'" data-tip="'+esc(tip)+'" title="'+esc(tip)+'">'+(clBig?'<b>'+esc(l.gen)+'</b><span>'+(l.madre?'Madre #'+esc(l.madre):'Sin madre')+'</span><span>'+l.code+'</span>':'<b>'+esc(abbr(l.gen))+'</b>'+(l.madre?'<span>#'+esc(l.madre)+'</span>':''))+'</div>'}
+    const over=c.occ>c.cap,pc=Math.min(100,c.occ/c.cap*100);
+    const lg=c.lots.map(l=>'<div class="lg"><i style="background:'+col(l.gen,l.madre)+'"></i><span><b style="font-weight:800">'+esc(l.gen)+'</b> · '+(l.madre?'madre #'+esc(l.madre):'sin madre')+' · '+l.code+' · <em class="age'+(l.late?' late':'')+'">'+l.age+' d en clonera'+(l.late?' · PASÓ EL PLAZO':'')+'</em></span><b>'+l.q+'</b></div>').join("")||'<div class="hint">Vacía: no hay clones en esta clonera.</div>';
+    const cur=c.def.f+"x"+c.def.c,fm=[["6x12","6×12 · 72 lugares"],["5x10","5×10 · 50 lugares"]];if(!fm.some(x=>x[0]===cur))fm.push([cur,"Actual: "+c.def.f+"×"+c.def.c+" · "+c.cap+" lugares"]);
+    const ed=clEditing===c.def.n?'<div class="ced"><div class="hint" style="margin:0 0 8px">Elegí el formato. Hay '+c.occ+' clones: el formato nuevo tiene que tener al menos '+c.occ+' lugares.</div><select class="efmt">'+fm.map(x=>'<option value="'+x[0]+'"'+(x[0]===cur?' selected':'')+'>'+x[1]+'</option>').join("")+'</select><div class="gact"><button class="btn sm primary" data-csave="'+esc(c.def.n)+'" type="button">Guardar formato</button><button class="btn sm" data-cedit="" type="button">Cancelar</button><button class="btn sm danger" data-crm="'+esc(c.def.n)+'" type="button">Quitar clonera</button></div></div>':'';
+    return '<div class="card cl"><div class="clh"><b>'+esc(c.def.n)+'</b><span class="sz">'+c.def.f+'×'+c.def.c+' · '+c.cap+' lugares</span><span class="spacer"></span><span class="pill '+(over?'bad':c.libres===0?'warn':'ok')+'">'+(over?'sobre capacidad por '+(c.occ-c.cap):'libres '+c.libres)+'</span>'+(c.late>0?'<span class="pill warn">'+c.late+' pasados de plazo</span>':'')+'</div>'+
+     '<div class="bar room'+(over?' over':'')+'" style="margin:0"><div class="nm" style="width:auto">'+c.occ+' de '+c.cap+'</div><div class="tr"><div class="fi2" style="width:'+pc+'%"></div></div></div>'+
+     '<div class="cellwrap"><div class="cgrid" style="grid-template-columns:repeat('+c.def.c+','+(clBig?'minmax(76px,1fr)':'minmax(0,24px)')+')">'+grid+'</div></div><div class="tip hint">'+(clBig?'Cada cuadrado muestra genética, madre y lote.':'Tocá un cuadrado para ver genética, madre y lote.')+'</div>'+lg+
+     (canWrite?'<div class="gact"><button class="btn sm primary" data-cl="'+esc(c.def.n)+'" type="button">Cargar clones acá</button><button class="btn sm" data-cedit="'+esc(c.def.n)+'" type="button">Editar formato</button></div>':'')+ed+'</div>'}).join("")+
+    '<p class="hint">Los clones se acomodan en orden de entrada del lote, no por posición exacta. Cada combinación de genética y madre tiene su propio color. Cuenta como ocupado: clones en inventario − bajas − entregas ya realizadas.</p>';
+}
+function homeEntrada(){const f=$("f-entrada");if($("c_slot").contains(f)){$("formcard").insertBefore(f,$("formcard").firstChild);f.classList.remove("on");$("c_open").style.display="";$("c_close").style.display="none"}}
+function openCloneraForm(name){
+  if(corr)endCorr();
+  $("c_slot").appendChild($("f-entrada"));$("f-entrada").classList.add("on");
+  $("c_open").style.display="none";$("c_close").style.display="";
+  $("e_lit").value="CLON";liveE();if(name)$("e_clonera").value=name;liveE();
+  $("c_load").scrollIntoView({behavior:"smooth",block:"start"});
+}
+async function saveFmt(name,card){
+  const fq=card.querySelector(".efmt").value.split("x"),f=+fq[0],c=+fq[1];
+  if(isNaN(f)||isNaN(c)||f<1||c<1||f>30||c>30)return climsg("Filas y columnas: enteros de 1 a 30.","bad");
+  const cl=C.cl.find(x=>x.def.n===name);
+  if(cl&&f*c<cl.occ)return climsg("No entra: "+name+" tiene "+cl.occ+" clones y ese formato ("+f+"×"+c+") tiene solo "+f*c+" lugares.","bad");
+  if(!db||!canWrite)return climsg("Tu usuario es solo lectura.","bad");
+  try{await mergeCfg(b=>{b.cloneraDefs=(b.cloneraDefs||[]).map(d=>d.n===name?Object.assign({},d,{f,c}):d);return b});clEditing=null;climsg("Formato de "+name+" actualizado: "+f+"×"+c+" ("+f*c+" lugares).","ok")}catch(e){climsg(explain(e),"bad")}
+}
+async function addClonera2(){
+  const n=$("ca_n").value.trim().toUpperCase().replace(/\s+/g," "),t=$("ca_t").value;
+  const q=t.split("x"),f=+q[0],c=+q[1];
+  if(!n)return climsg("Escribí el nombre de la clonera.","bad");
+  if(!db||!canWrite)return climsg("Tu usuario es solo lectura.","bad");
+  if(isNaN(f)||isNaN(c)||f<1||c<1||f>30||c>30)return climsg("Filas y columnas: enteros de 1 a 30.","bad");
+  if((cfg.cloneraDefs||[]).some(d=>d.n===n))return climsg("Ya existe: "+n,"bad");
+  try{await mergeCfg(b=>{b.cloneraDefs=(b.cloneraDefs||[]).concat([{n,f,c}]);return b});$("ca_n").value="";climsg("Agregada: "+n+" ("+f+"×"+c+" = "+f*c+" lugares)","ok")}catch(e){climsg(explain(e),"bad")}
+}
+$("e_fill").addEventListener("click",()=>{$("e_cant").value=$("e_fill").dataset.n;liveE()});
+$("c_open").addEventListener("click",()=>openCloneraForm(null));
+$("c_close").addEventListener("click",homeEntrada);
+$("c_big").addEventListener("click",()=>{clBig=!clBig;try{localStorage.setItem("clBig",clBig?"1":"0")}catch(e){}renderCloneras()});
+$("ca_go").addEventListener("click",addClonera2);
+$("c_list").addEventListener("click",e=>{
+  const t=e.target;
+  const cell=t.closest(".cell[data-tip]");if(cell){const tip=cell.closest(".cl").querySelector(".tip");if(tip)tip.textContent=cell.dataset.tip;return}
+  const ld=t.closest("[data-cl]");if(ld)return openCloneraForm(ld.dataset.cl);
+  const ce=t.closest("[data-cedit]");if(ce){clEditing=ce.dataset.cedit||null;clearMsg("c_msg");return renderCloneras()}
+  const cs=t.closest("[data-csave]");if(cs)return saveFmt(cs.dataset.csave,cs.closest(".cl"));
+  const cr=t.closest("[data-crm]");
+  if(cr){if(cr.dataset.arm){clearTimeout(cr._t);clEditing=null;return removeClonera(cr.dataset.crm)}
+    cr.dataset.arm="1";cr.textContent="¿Seguro? Tocá de nuevo";cr._t=setTimeout(()=>{cr.dataset.arm="";cr.textContent="Quitar clonera"},3500)}
+});
+let germMode=null,germTarget=null;
+const gById=id=>C.gs.find(x=>x.id===id);
+function setMode(m,id){
+  germMode=m;germTarget=id||null;const g=id?gById(id):null;
+  $("g_form").style.display="block";clearMsg("g_msg");
+  document.querySelectorAll("#f-germ [data-m]").forEach(el=>{el.style.display=el.dataset.m.split(" ").includes(m)?"":"none"});
+  $("g_title").textContent={siembra:"Nueva siembra",germino:"Registrar germinadas",perdida:"Plantines perdidos",pasar:"Pasar a inventario"}[m];
+  $("g_ctx").textContent=g?g.g.genetica+" · "+g.g.banco+" · sembrada el "+fdate(g.g.fecha):"Cargá la fecha, la genética, el banco y cuántas semillas sembraste.";
+  $("g_cl").textContent={germino:"Cuántas germinaron (nuevas)",perdida:"Cuántos plantines se perdieron",pasar:"Cuántos plantines pasan"}[m]||"Cantidad";
+  $("g_cant").value="";$("g_sem").value="";$("g_notas").value="";showNews();liveG();
+  $("g_form").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function liveG(){
+  const h=$("g_hint");liveBad.g=false;h.className="hint";h.textContent="";
+  const g=germTarget?gById(germTarget):null;
+  if(!germMode||germMode==="siembra"){applyBtns();return}
+  if(!g){applyBtns();return}
+  const c=int($("g_cant").value),max=germMode==="germino"?g.sem-g.germ:Math.max(0,g.pend);
+  setMax("g_cant",max);
+  let t=germMode==="germino"?"Quedan "+max+" semillas por germinar.":"Hay "+max+" plantines para "+(germMode==="pasar"?"pasar a inventario":"dar de baja")+".";
+  if(!isNaN(c)&&c>max){liveBad.g=true;h.className="hint bad";t="Te pasás por "+(c-max)+": solo hay "+max+"."}
+  else if(!isNaN(c)&&c>0)t+=" Después quedan "+(max-c)+".";
+  h.textContent=t;applyBtns();
+}
+async function onGerm(ev){
+  ev.preventDefault();clearMsg("g_msg");
+  const f=$("g_fecha").value,notas=$("g_notas").value.trim();
+  if(!f)return say("g_msg","Elegí la fecha.","bad");
+  if(f>today())return say("g_msg","La fecha no puede ser futura.","bad");
+  let ok=false;
+  if(germMode==="siembra"){
+    const gen=pv("g_gen","g_gnew"),ban=pv("g_banco","g_bnew"),sem=qty($("g_sem").value,5000);
+    if(!gen||!ban)return say("g_msg","Elegí genética y banco (si elegiste ➕ Nuevo, escribí el nombre).","bad");
+    if(isNaN(sem)||sem<1)return say("g_msg","Las semillas tienen que ser un entero entre 1 y 5000.","bad");
+    const key=[f,gen,ban,sem].join("|");
+    if(!corr&&S.germinaciones.some(x=>[x.fecha,x.genetica,x.banco,x.semillas].join("|")===key)&&dupOK!==key){dupOK=key;return say("g_msg","Ya hay una siembra idéntica (misma fecha, genética, banco y cantidad). Si es otra distinta, tocá Guardar de nuevo.","bad")}
+    ok=await commit("germinaciones",{fecha:f,genetica:gen,banco:ban,semillas:sem,notas,ts:Date.now()},"g_msg");
+    if(ok){await addItems([["geneticas",gen],["bancos",ban]]);dupOK="";["g_gnew","g_bnew"].forEach(i=>$(i).value="");$("g_gen").value="";$("g_banco").value=""}
+  }else{
+    const g=gById(germTarget);if(!g)return say("g_msg","Esa siembra ya no existe.","bad");
+    if(f<g.g.fecha)return say("g_msg","La fecha es anterior a la siembra ("+fdate(g.g.fecha)+").","bad");
+    const c=qty($("g_cant").value,1e6);
+    if(isNaN(c)||c<1)return say("g_msg","La cantidad tiene que ser un entero de 1 en adelante.","bad");
+    if(germMode==="germino"){
+      if(g.cerrada&&!corr)return say("g_msg","La germinación de esta siembra ya está cerrada.","bad");
+      if(c>g.sem-g.germ)return say("g_msg","Bloqueado: solo quedan "+(g.sem-g.germ)+" semillas por germinar.","bad");
+      ok=await commit("germ_ev",{germ:g.id,tipo:"GERMINO",fecha:f,cantidad:c,notas,ts:Date.now()},"g_msg");
+    }else if(germMode==="perdida"){
+      if(c>g.pend)return say("g_msg","Bloqueado: solo hay "+g.pend+" plantines disponibles.","bad");
+      ok=await commit("germ_ev",{germ:g.id,tipo:"PERDIDA",fecha:f,cantidad:c,notas,ts:Date.now()},"g_msg");
+    }else{
+      const lit=$("g_lit").value;
+      if(!lit)return say("g_msg","Elegí a qué litraje pasan.","bad");
+      if(c>g.pend)return say("g_msg","Bloqueado: solo hay "+g.pend+" plantines para pasar.","bad");
+      const n=nextLote();
+      ok=await commit("entradas",{n,fecha:f,tipo:"GERMINACIÓN",clonera:"",genetica:g.g.genetica,madre:"",gen:"",litraje:lit,cantidad:c,origen:g.g.banco,notas:"Germinación del "+fdate(g.g.fecha)+(notas?" · "+notas:""),germ:g.id,ts:Date.now()},"g_msg");
+      if(ok)toast("Pasaron "+c+" a inventario como lote L"+pad(n)+" ("+lit+")");
+    }
+  }
+  if(ok){if(germMode==="siembra")toast("Siembra guardada");else if(germMode!=="pasar")toast("Guardado");$("g_form").style.display="none";germMode=null;germTarget=null;liveG()}
+}
+function renderGerm(){
+  const gs=C.gs.slice().sort((a,b)=>(b.g.ts||0)-(a.g.ts||0));
+  const tS=gs.reduce((a,x)=>a+x.sem,0),tG=gs.reduce((a,x)=>a+x.germ,0),cer=gs.filter(x=>x.cerrada),cS=cer.reduce((a,x)=>a+x.sem,0),cG=cer.reduce((a,x)=>a+x.germ,0),tP=gs.reduce((a,x)=>a+Math.max(0,x.pend),0);
+  $("g_kpis").innerHTML='<div class="kpis">'+
+    '<div class="kpi germ"><div class="l">Semillas sembradas</div><div class="n">'+tS+'</div><div class="s">'+gs.length+' siembra'+(gs.length===1?'':'s')+'</div></div>'+
+    '<div class="kpi inv"><div class="l">Germinadas</div><div class="n">'+tG+'</div><div class="s">de '+tS+' semillas</div></div>'+
+    '<div class="kpi venta"><div class="l">% de germinación</div><div class="n">'+(cS?Math.round(cG/cS*100)+"%":"—")+'</div><div class="s">'+(cS?"en siembras cerradas":"cerrá una siembra para verlo")+'</div></div>'+
+    '<div class="kpi sala"><div class="l">Para pasar a inventario</div><div class="n">'+tP+'</div><div class="s">plantines germinados</div></div></div>';
+  $("g_list").innerHTML=gs.length?gs.map(x=>{
+    const pct=x.sem?Math.round(x.germ/x.sem*100):0,done=x.cerrada&&x.pend===0;
+    const pill=done?'<span class="pill ok">COMPLETA</span>':x.cerrada?'<span class="pill">CERRADA</span>':'<span class="pill warn">EN GERMINACIÓN</span>';
+    const lt=x.lotes.length?'<div class="hint">En inventario: '+x.lotes.map(e=>"L"+pad(e.n)+" · "+e.litraje+" · "+e.cantidad+" u.").join(" · ")+'</div>':'';
+    const btn=canWrite?'<div class="gact">'+
+      (!x.cerrada&&x.germ<x.sem?'<button class="btn sm" data-ga="germino|'+x.id+'" type="button">Registrar germinadas</button>':'')+
+      (x.pend>0?'<button class="btn sm primary" data-ga="pasar|'+x.id+'" type="button">Pasar a inventario</button><button class="btn sm" data-ga="perdida|'+x.id+'" type="button">Plantín perdido</button>':'')+
+      (!x.cerrada?'<button class="btn sm danger" data-ga="cerrar|'+x.id+'" type="button">Cerrar germinación</button>':'')+'</div>':'';
+    return '<div class="bk" style="margin-bottom:10px"><div class="top"><span class="code">'+fdate(x.g.fecha)+'</span><div style="min-width:0"><div class="gn">'+esc(x.g.genetica)+'</div><div class="gs">'+esc(x.g.banco)+(x.g.ejemplo?" · ejemplo":"")+'</div></div><span class="lit" style="background:var(--c-germ-bg);color:var(--c-germ)">'+pct+'% germinó</span></div>'+
+      '<div style="margin-bottom:10px">'+pill+'</div>'+
+      '<div class="st">'+sx("Semillas",x.sem)+sx("Germinadas",x.germ,"of")+sx(x.cerrada?"No germinaron":"Faltan germinar",x.sem-x.germ)+sx("Perdidos",x.perd)+sx("Ya en inventario",x.pas,x.pas?"sala":"")+sx("Para pasar",x.pend,x.pend>0?"disp":"")+'</div>'+lt+btn+'</div>'}).join(""):'<div class="card empty">Todavía no hay siembras. Tocá "Nueva siembra de semillas".</div>';
+}
+$("g_new").addEventListener("click",()=>{if(corr)endCorr();setMode("siembra")});
+$("g_cancel").addEventListener("click",()=>{$("g_form").style.display="none";germMode=null;germTarget=null;liveG()});
+$("f-germ").addEventListener("submit",onGerm);
+$("g_cant").addEventListener("input",liveG);
+$("v-germ").addEventListener("click",async e=>{
+  const b=e.target.closest("[data-ga]");if(!b)return;
+  if(corr)endCorr();
+  const i=b.dataset.ga.indexOf("|"),a=b.dataset.ga.slice(0,i),id=b.dataset.ga.slice(i+1);
+  if(a!=="cerrar")return setMode(a,id);
+  if(!b.dataset.arm){b.dataset.arm="1";const old=b.textContent;b.textContent="¿Seguro? Tocá de nuevo";setTimeout(()=>{b.dataset.arm="";b.textContent=old},4000);return}
+  clearMsg("g_lmsg");
+  const ok=await commit("germ_ev",{germ:id,tipo:"CIERRE",fecha:today(),cantidad:0,notas:"",ts:Date.now()},"g_lmsg");
+  if(ok)toast("Germinación cerrada");
+});
+function renderStock(){
+  const q=$("k_q").value.trim().toLowerCase(),gf=$("k_gen").value,nz=$("k_nz").checked;
+  const lf=[...document.querySelectorAll("#k_lits .chip.on")].map(c=>c.dataset.l);
+  const rows=C.buckets.filter(b=>{
+    if(nz&&b.inv===0&&b.init+b.tin===0)return false;
+    if(nz&&b.inv===0&&b.disp+b.baja+b.mb+b.s420===0&&b.libre===0)return false;
+    if(lf.length&&!lf.includes(b.lit))return false;
+    if(gf&&(!b.e||b.e.genetica!==gf))return false;
+    if(q&&!(b.code+" "+b.name+" "+(b.e?b.e.clonera||"":"")).toLowerCase().includes(q))return false;
+    return true});
+  $("k_list").innerHTML=rows.length?rows.map(b=>
+    '<div class="bk"><div class="top"><span class="code">'+b.code+'</span><div style="min-width:0"><div class="gn">'+esc(b.name)+'</div><div class="gs">'+esc(b.e?(b.e.clonera||"")+(b.e.gen!==""&&b.e.gen!=null?" · gen "+b.e.gen:""):"")+'</div></div><span class="lit">'+b.lit+'</span></div>'+
+    '<div class="st">'+sx("Inventario",b.inv)+sx("Asignado MB",b.mb,b.mb?"sala":"")+sx("Asignado 420",b.s420,b.s420?"sala":"")+sx("Para venta",b.venta)+sx("Entregas/bajas",b.disp+b.baja,(b.disp+b.baja)?"disp":"")+(b.ent?sx("Entregadas",b.ent):"")+
+    (b.ofertable?sx("Para ofrecer",b.ofrecer,"of"):'<div class="sx na"><div class="l">Para ofrecer</div><div class="n">no ofrecible</div></div>')+'</div>'+(canWrite&&b.e&&b.libre>0?'<div class="gact"><button class="btn sm" data-sc="trasplante|'+esc(b.k)+'" type="button">Trasplantar</button><button class="btn sm" data-sc="sala|'+esc(b.k)+'" type="button">Asignar a sala</button>'+(b.ofertable?'<button class="btn sm primary" data-sc="salida|'+esc(b.k)+'" type="button">Entregar / baja</button>':'')+'</div>':'')+'</div>').join(""):'<div class="empty card" style="grid-column:1/-1">No hay lotes con esos filtros.</div>';
+}
+function renderHist(){
+  const types=[["todo","Todo"],["entrada","Entradas"],["germ","Germinación"],["trasplante","Trasplantes"],["sala","Salas"],["dispensa","Dispensa"],["baja","Bajas"],["audit","Anulados y corregidos"]];
+  $("h_f").innerHTML=types.map(x=>'<button class="chip'+(hFilter===x[0]?" on":"")+'" data-hf="'+x[0]+'" type="button">'+x[1]+'</button>').join("");
+  const all=movements().filter(m=>hFilter==="todo"||(hFilter==="audit"?(m.raw.anulado||(m.raw.rev||[]).some(v=>v.tipo!=="ENTREGA")):m.t===hFilter)).slice(0,200);
+  $("h_list").innerHTML=all.length?all.map(m=>mvHTML(m,true)).join(""):'<div class="empty">Sin movimientos.</div>';
+}
+function controls(){
+  const out=[];const D=S;
+  out.push(C.viol.length?{k:"bad",t:"Problemas de stock ("+C.viol.length+"): "+C.viol.slice(0,3).map(v=>whereNeg(v)).join("; ")}:{k:"ok",t:"Sin stock negativo ni cloneras sobre su capacidad."});
+  const ns=D.entradas.map(e=>e.n),dup=ns.filter((n,i)=>ns.indexOf(n)!==i);
+  out.push(dup.length?{k:"warn",t:"Hay lotes con número repetido ("+[...new Set(dup)].map(n=>"L"+pad(n)).join(", ")+"): dos socios cargaron a la vez. Anulá uno y volvé a cargarlo."}:{k:"ok",t:"Numeración de lotes sin repetidos."});
+  const ids=new Set(D.entradas.map(e=>e.id));
+  const orf=[...D.trasplantes,...D.asignaciones,...D.salidas].filter(r=>!ids.has(r.lote)).length+S.germ_ev.filter(r=>!S.germinaciones.some(g=>g.id===r.germ)).length;
+  out.push(orf?{k:"bad",t:orf+" movimiento(s) apuntan a un lote que no existe."}:{k:"ok",t:"Todos los movimientos apuntan a un lote existente."});
+  const sd=D.salidas.filter(s=>s.destino!=="BAJA"&&!s.socio).length,sb=D.salidas.filter(s=>s.destino==="BAJA"&&!s.motivo).length;
+  out.push(sd||sb?{k:"warn",t:(sd?sd+" entrega(s) sin socio. ":"")+(sb?sb+" baja(s) sin motivo.":"")}:{k:"ok",t:"Entregas con socio y bajas con motivo."});
+  const sinCl=C.buckets.filter(b=>b.lit==="CLON"&&b.inv>0&&b.e&&!(cfg.cloneraDefs||[]).some(d=>d.n===b.e.clonera)).length;
+  if(sinCl)out.push({k:"warn",t:sinCl+" lote(s) de clones están en una clonera que no está definida en Listas: no aparecen en el croquis."});
+  const nAn=COLS.reduce((a,c)=>a+SA[c].filter(r=>r.anulado).length,0),nEd=COLS.reduce((a,c)=>a+SA[c].filter(r=>!r.anulado&&(r.rev||[]).some(v=>v.tipo!=="ENTREGA")).length,0);
+  out.push({k:"ok",t:"Historial completo: "+nAn+" anulados y "+nEd+" corregidos se conservan con motivo, quién y cuándo."});
+  const nl=C.cl.reduce((a,c)=>a+c.lots.filter(l=>l.late).length,0);if(nl)out.push({k:"warn",t:nl+" lote(s) en clonera pasaron el plazo de "+cfg.plazoClon+" días. Mirá el Inicio."});
+  const o1=C.tot.mb>cfg.capMB,o2=C.tot.s420>cfg.cap420;
+  out.push(o1||o2?{k:"warn",t:"Salas sobre capacidad: "+(o1?"MB "+C.tot.mb+"/"+cfg.capMB+" ":"")+(o2?"420 "+C.tot.s420+"/"+cfg.cap420:"")}:{k:"ok",t:"Asignaciones dentro de la capacidad de MB y 420."});
+  return out;
+}
+function renderAjustes(){
+  const c=controls();
+  $("a_ctl").innerHTML=c.map(x=>'<div class="ctl '+x.k+'"><i>'+(x.k==="ok"?"✓":x.k==="bad"?"✕":"!")+'</i><span>'+esc(x.t)+'</span></div>').join("");
+}
+function renderBanners(){
+  let h="";
+  if(dbErr)h+='<div class="banner bad"><div class="grow"><b>Sin base de datos.</b> '+esc(dbErr)+'</div></div>';
+  else if(!canWrite)h+='<div class="banner warn"><div class="grow"><b>Modo lectura.</b> Podés ver todo, pero para cargar necesitás acceso de Colaborador.</div></div>';
+  if(C.viol.length)h+='<div class="banner bad"><div class="grow"><b>Problema detectado:</b> '+esc(whereNeg(C.viol[0]))+(C.viol.length>1?' (y '+(C.viol.length-1)+' más)':'')+'. Suele pasar si dos socios cargaron a la vez: anulá el último movimiento en Historial.</div></div>';
+  const ej=COLS.reduce((a,c)=>a+S[c].filter(r=>r.ejemplo).length,0);
+  if(corr)h+='<div class="banner warn"><div class="grow"><b>Corrigiendo un movimiento.</b> Al guardar, el original queda como CORREGIDO en el historial, con tu motivo.</div><button class="btn sm" id="corrCancel" type="button">Cancelar corrección</button></div>';
+  if(ej&&canWrite)h+='<div class="banner warn"><div class="grow"><b>Hay datos de ejemplo cargados.</b> Sirven para probar; borralos antes de empezar con el stock real.</div><button class="btn sm danger" id="delEj" type="button">Borrar ejemplos</button></div>';
+  $("banners").innerHTML=h;
+  const st=$("status"),c=controls().filter(x=>x.k!=="ok");
+  if(dbErr){st.className="pill bad";st.textContent="Sin conexión"}
+  else if(!COLS.every(k=>loaded[k])){st.className="pill";st.textContent="Cargando…"}
+  else if(c.some(x=>x.k==="bad")){st.className="pill bad";st.textContent="Revisar controles"}
+  else if(c.length){st.className="pill warn";st.textContent="Hay avisos"}
+  else{st.className="pill ok";st.textContent="Todo en orden"}
+}
+
+/* ---------- formularios ---------- */
+const NEWS=[['g_gen','g_gnew','geneticas'],['g_banco','g_bnew','bancos'],['e_gen','e_gnew','geneticas'],['e_origen','e_orinew','origenes'],['x_socio','x_socnew','socios'],['x_mot','x_motnew','motivos']];
+const optsN=(arr,ph)=>opts(arr,ph)+'<option value="__new__">➕ Nuevo…</option>';
+const pv=(sel,inp)=>{const v=$(sel).value;return v==='__new__'?$(inp).value.trim().toUpperCase().replace(/\s+/g,' '):v};
+function showNews(){NEWS.forEach(n=>{$(n[1]+'_w').style.display=$(n[0]).value==='__new__'?'block':'none'})}
+const opts=(arr,ph)=>(ph!=null?'<option value="">'+ph+'</option>':'')+arr.map(x=>'<option>'+esc(x)+'</option>').join("");
+function setOpts(id,html){const s=$(id),v=s.value;s.innerHTML=html;if([...s.options].some(o=>o.value===v||o.text===v))s.value=v}
+function bkOpts(list){return '<option value="">Elegí lote y litraje…</option>'+list.map(b=>'<option value="'+esc(b.k)+'">'+esc(bkLabel(b))+'</option>').join("")}
+function bkByKey(k){return C.buckets.find(b=>b.k===k)}
+function fillForms(){
+  setOpts("e_tipo",opts(cfg.tipos));setOpts("e_clonera",'<option value="">Elegí…</option>'+C.cl.map(x=>'<option value="'+esc(x.def.n)+'">'+esc(x.def.n+" · "+x.def.f+"×"+x.def.c+" · libres "+x.libres)+"</option>").join(""));
+  setOpts("e_gen",opts(cfg.geneticas,"Elegí…")+'<option value="__new__">➕ Nueva genética…</option>');
+  setOpts("e_genr",opts(Array.from({length:16},(_,i)=>i),"—"));
+  setOpts("e_lit",opts(LIT,"Elegí…"));setOpts("e_origen",optsN(cfg.origenes,"Elegí…"));
+  setOpts("t_bk",bkOpts(C.buckets.filter(b=>b.libre>0)));setOpts("s_bk",bkOpts(C.buckets.filter(b=>b.libre>0)));
+  setOpts("x_bk",bkOpts(C.buckets.filter(b=>b.ofertable&&b.libre>0)));
+  setOpts("t_dest",opts(LIT,"Elegí…"));
+  setOpts("x_socio",optsN(cfg.socios,"Elegí…"));setOpts("x_mot",optsN(cfg.motivos,"Elegí…"));
+  setOpts("k_gen",'<option value="">Todas las genéticas</option>'+opts([...new Set(S.entradas.map(e=>e.genetica))].sort()));
+  const nextN=nextLote();
+  if(!$("k_lits").children.length)$("k_lits").innerHTML=LIT.map(l=>'<button class="chip" data-l="'+l+'" type="button">'+l+'</button>').join("");
+  ["t_fecha","s_fecha","x_fecha","e_fecha"].forEach(i=>{if(!$(i).value)$(i).value=today()});
+  setOpts("g_gen",optsN(cfg.geneticas,"Elegí…"));setOpts("g_banco",optsN(cfg.bancos,"Elegí…"));setOpts("g_lit",opts(LIT.filter(l=>l!=="CLON"),"Elegí…"));
+  if(!$("g_fecha").value)$("g_fecha").value=today();$("g_fecha").max=today();
+  liveG();liveE();liveT();liveS();liveX();dest();
+  showNews();$("e_fecha").max=today();$("t_fecha").max=today();$("s_fecha").max=today();
+}
+const liveBad={g:false,e:false,t:false,s:false,x:false};let busy=false;
+function applyBtns(){const off=!canWrite||!!dbErr||busy;[["f-germ",liveBad.g],["f-entrada",liveBad.e],["f-trasplante",liveBad.t],["f-sala",liveBad.s],["f-salida",liveBad.x]].forEach(a=>{const b=document.querySelector("#"+a[0]+" button[type=submit]");if(b)b.disabled=off||a[1]})}
+function setMax(id,v){if(v==null)$(id).removeAttribute("max");else $(id).max=v}
+function liveE(){
+  const lit=$("e_lit").value,sel=$("e_clonera"),isC=lit==="CLON";
+  sel.disabled=!isC;if(!isC)sel.value="";
+  const c=C.cl.find(x=>x.def.n===sel.value),cant=int($("e_cant").value);
+  const nextN=nextLote();
+  let t="Se va a crear el lote L"+pad(nextN)+".",k="";liveBad.e=false;
+  if(isC&&c){const libres=Math.max(0,c.libres);t+=" "+c.def.n+" ("+c.def.f+"×"+c.def.c+"): hay "+c.occ+" de "+c.cap+", entran hasta "+libres+".";
+    if(!isNaN(cant)&&cant>libres){liveBad.e=true;t="Te pasás por "+(cant-libres)+": en "+c.def.n+" solo entran "+libres+" más (capacidad "+c.cap+").";k="bad"}}
+  else if(isC)t+=" Elegí la clonera para ver cuánto lugar queda.";
+  else if(lit)t+=" Los litrajes distintos de CLON no ocupan clonera.";
+  const fb=$("e_fill");if(isC&&c&&c.libres>0){fb.style.display="";fb.dataset.n=Math.min(5000,c.libres);fb.textContent="Cargar todo lo libre ("+Math.min(5000,c.libres)+")"}else fb.style.display="none";
+  setMax("e_cant",isC&&c?Math.min(5000,Math.max(0,c.libres)):5000);
+  $("e_hint").className="hint "+k;$("e_hint").textContent=t;applyBtns();
+}
+function liveT(){
+  const b=bkByKey($("t_bk").value),c=int($("t_cant").value)||0,m=int($("t_mue").value)||0;
+  $("t_hint").textContent=b?"Libre: "+b.libre+" · inventario: "+b.inv:(C.buckets.some(x=>x.libre>0)?"":"No hay stock libre para mover: primero cargá una entrada.");$("t_hint").className="hint";
+  const r=$("t_res");liveBad.t=false;
+  if(b){const q=b.libre-c-m;liveBad.t=q<0;
+    r.className="hint "+(q<0?"bad":"ok");
+    r.textContent=q<0?"Te pasás por "+(-q)+": no hay tanto libre en este lote y litraje.":"Después queda libre "+q+" en "+b.lit+(c>0&&$("t_dest").value?" y se suman "+c+" a "+$("t_dest").value:"")+".";
+  }else r.textContent="";
+  applyBtns();
+}
+function liveS(){
+  const b=bkByKey($("s_bk").value),c=int($("s_cant").value)||0,sala=document.querySelector('input[name=s_sala]:checked').value;
+  $("s_hint").textContent=b?"Libre: "+b.libre:(C.buckets.some(x=>x.libre>0)?"":"No hay stock libre para asignar: primero cargá una entrada.");
+  setMax("s_cant",b?b.libre:null);
+  const used=sala==="MB"?C.tot.mb:C.tot.s420,cap=sala==="MB"?cfg.capMB:cfg.cap420,r=$("s_res");
+  let txt="Sala "+sala+": "+used+" asignadas de "+cap+(c>0?" → quedarían "+(used+c):"")+".",k="ok";liveBad.s=false;
+  if(b&&c>b.libre){txt="Te pasás por "+(c-b.libre)+": solo hay "+b.libre+" libres en este lote y litraje.";k="bad";liveBad.s=true}
+  else if(used+c>cap){txt+=" Supera la capacidad de la sala (aviso, se puede guardar).";k="warn"}
+  r.className="hint "+k;r.textContent=txt;applyBtns();
+}
+function dest(){
+  const baja=document.querySelector('input[name=x_dest]:checked').value==="BAJA";
+  $("x_mot").disabled=!baja;$("x_socio").disabled=baja;
+  if(!baja){setOpts("x_mot",'<option value="">NO APLICA</option>');}else if($("x_mot").options.length<2||$("x_mot").options[0].text==="NO APLICA"){setOpts("x_mot",optsN(cfg.motivos,"Elegí…"))}
+  if(baja)setOpts("x_socio",'<option value="">NO APLICA</option>');else if($("x_socio").options[0].text==="NO APLICA")setOpts("x_socio",optsN(cfg.socios,"Elegí…"));
+  $("x_fecha").min=(baja||corr)?"":today();showNews();
+}
+function liveX(){
+  const b=bkByKey($("x_bk").value),c=int($("x_cant").value)||0,r=$("x_res");
+  $("x_hint").textContent=b?"Libre para ofrecer: "+b.libre:(C.buckets.some(x=>x.ofertable&&x.libre>0)?"":"No hay clones ni 300 cm³ libres: primero cargá una entrada.");
+  setMax("x_cant",b?b.libre:null);liveBad.x=false;
+  if(!b){r.textContent="";applyBtns();return}
+  const q=b.libre-c;liveBad.x=q<0;r.className="hint "+(q<0?"bad":"ok");
+  r.textContent=q<0?"Te pasás por "+(-q)+": no podés sacar más de lo libre.":"Después quedan "+q+" libres en este lote y litraje.";applyBtns();
+}
+function qty(v,max){const n=int(v);if(isNaN(n)||n<0||n>max)return NaN;return n}
+
+let dupOK="";
+const ent=id=>S.entradas.find(e=>e.id===id);
+function dateBlock(fecha,b){
+  if(!fecha)return "Elegí la fecha.";
+  const e=ent(b.lote);
+  if(fecha>today())return "La fecha no puede ser futura.";
+  if(e&&fecha<e.fecha)return "La fecha es anterior a la entrada de ese lote ("+fdate(e.fecha)+").";
+  return "";
+}
+async function onEntrada(ev){
+  ev.preventDefault();clearMsg("e_msg");
+  const fecha=$("e_fecha").value,gen=pv("e_gen","e_gnew"),ori=pv("e_origen","e_orinew"),lit=$("e_lit").value,cant=qty($("e_cant").value,5000),madre=$("e_madre").value.trim();
+  const isC=lit==="CLON",clon=isC?$("e_clonera").value:"";
+  if(!fecha||!gen||!lit||!ori||(isC&&!clon))return say("e_msg","Completá fecha, genética, litraje y origen"+(isC?" y elegí la clonera":"")+" (si elegiste ➕ Nuevo, escribí el nombre).","bad");
+  if(fecha>today())return say("e_msg","La fecha de una entrada no puede ser futura.","bad");
+  if(isNaN(cant))return say("e_msg","La cantidad tiene que ser un entero entre 0 y 5000.","bad");
+  const c=C.cl.find(x=>x.def.n===clon);
+  if(isC&&c&&cant>Math.max(0,c.libres))return say("e_msg","Bloqueado: en "+clon+" ("+c.def.f+"×"+c.def.c+") solo entran "+Math.max(0,c.libres)+" más y estás cargando "+cant+".","bad");
+  const key=[fecha,gen,madre,lit,cant,clon].join("|");
+  if(!corr&&S.entradas.some(e=>[e.fecha,e.genetica,e.madre,e.litraje,e.cantidad,e.clonera||""].join("|")===key)&&dupOK!==key){dupOK=key;return say("e_msg","Ya hay una entrada idéntica (misma fecha, genética, madre, litraje y cantidad). Si es otra distinta, tocá Guardar de nuevo.","bad")}
+  const n=nextLote();
+  const ok=await commit("entradas",{n,fecha,tipo:$("e_tipo").value,clonera:clon,genetica:gen,madre,gen:$("e_genr").value,litraje:lit,cantidad:cant,origen:ori,notas:$("e_notas").value.trim(),ts:Date.now()},"e_msg");
+  if(!ok)return;
+  await addItems([["geneticas",gen],["origenes",ori]]);
+  say("e_msg","Guardado: lote L"+pad(n)+" · "+gen+" · "+cant+" en "+lit+(clon?" ("+clon+")":"")+".","ok");toast("Entrada guardada");
+  $("e_cant").value="";$("e_notas").value="";["e_gnew","e_orinew"].forEach(i=>$(i).value="");$("e_gen").value="";dupOK="";showNews();
+}
+async function onTras(ev){
+  ev.preventDefault();clearMsg("t_msg");
+  const b=bkByKey($("t_bk").value),c=qty($("t_cant").value||"0",1e6),m=qty($("t_mue").value||"0",1e6),hasta=$("t_dest").value;
+  if(!b)return say("t_msg","Elegí el lote y litraje de origen.","bad");
+  const db_=dateBlock($("t_fecha").value,b);if(db_)return say("t_msg",db_,"bad");
+  if(isNaN(c)||isNaN(m))return say("t_msg","Cantidad y muertes tienen que ser enteros de 0 en adelante.","bad");
+  if(c===0&&m===0)return say("t_msg","Cargá cantidad trasplantada o bajas por muerte.","bad");
+  if(c>0&&!hasta)return say("t_msg","Elegí a qué litraje pasan.","bad");
+  if(c>0&&hasta===b.lit)return say("t_msg","El litraje nuevo tiene que ser distinto del de origen.","bad");
+  if(c+m>b.libre)return say("t_msg","Bloqueado: pedís "+(c+m)+" y solo hay "+b.libre+" libres.","bad");
+  const ok=await commit("trasplantes",{fecha:$("t_fecha").value,lote:b.lote,desde:b.lit,hasta:c>0?hasta:b.lit,cantidad:c,muertes:m,notas:$("t_notas").value.trim(),ts:Date.now()},"t_msg");
+  if(ok){say("t_msg","Guardado: "+(c>0?c+" pasan de "+b.lit+" a "+hasta:"")+(m?(c>0?" · ":"")+m+" bajas por muerte":"")+".","ok");toast("Trasplante guardado");$("t_cant").value="";$("t_mue").value="";$("t_notas").value=""}
+}
+async function onSala(ev){
+  ev.preventDefault();clearMsg("s_msg");
+  const b=bkByKey($("s_bk").value),c=qty($("s_cant").value,1e6),sala=document.querySelector('input[name=s_sala]:checked').value;
+  if(!b)return say("s_msg","Elegí el lote y litraje.","bad");
+  const d=dateBlock($("s_fecha").value,b);if(d)return say("s_msg",d,"bad");
+  if(isNaN(c))return say("s_msg","La cantidad tiene que ser un entero de 0 en adelante.","bad");
+  if(c>b.libre)return say("s_msg","Bloqueado: pedís "+c+" y solo hay "+b.libre+" libres.","bad");
+  const ok=await commit("asignaciones",{fecha:$("s_fecha").value,sala,lote:b.lote,litraje:b.lit,cantidad:c,notas:$("s_notas").value.trim(),ts:Date.now()},"s_msg");
+  if(ok){say("s_msg","Asignado: "+c+" de "+b.name+" ("+b.lit+") a "+sala+".","ok");toast("Asignación guardada");$("s_cant").value="";$("s_notas").value=""}
+}
+async function onSalida(ev){
+  ev.preventDefault();clearMsg("x_msg");
+  const b=bkByKey($("x_bk").value),c=qty($("x_cant").value,1e6),d=document.querySelector('input[name=x_dest]:checked').value,f=$("x_fecha").value;
+  if(!b)return say("x_msg","Elegí el lote y litraje.","bad");
+  if(!b.ofertable)return say("x_msg","Solo se pueden sacar CLON y 300 CM3.","bad");
+  if(!f)return say("x_msg","Elegí la fecha.","bad");
+  const e=ent(b.lote);if(e&&f<e.fecha)return say("x_msg","La fecha es anterior a la entrada de ese lote ("+fdate(e.fecha)+").","bad");
+  if(d==="DISPENSA"&&f<today()&&!(corr&&corr.coll==="salidas"&&corr.orig.fecha===f))return say("x_msg","La entrega programada no puede ser anterior a hoy.","bad");
+  if(isNaN(c))return say("x_msg","La cantidad tiene que ser un entero de 0 en adelante.","bad");
+  const socio=pv("x_socio","x_socnew"),mot=pv("x_mot","x_motnew");
+  if(d==="DISPENSA"&&!socio)return say("x_msg","Elegí el socio de la entrega (si elegiste ➕ Nuevo, escribí el nombre).","bad");
+  if(d==="BAJA"&&!mot)return say("x_msg","Elegí el motivo de la baja (si elegiste ➕ Nuevo, escribí el motivo).","bad");
+  if(c>b.libre)return say("x_msg","Bloqueado: pedís "+c+" y solo hay "+b.libre+" libres para ofrecer.","bad");
+  const ok=await commit("salidas",{fecha:f,lote:b.lote,litraje:b.lit,cantidad:c,destino:d,socio:d==="DISPENSA"?socio:"",motivo:d==="BAJA"?mot:"NO APLICA",notas:$("x_notas").value.trim(),ts:Date.now()},"x_msg");
+  if(ok){await addItems([["socios",d==="DISPENSA"?socio:""],["motivos",d==="BAJA"?mot:""]]);say("x_msg","Guardado: "+c+" de "+b.name+" ("+b.lit+") · "+(d==="BAJA"?"baja":"entrega "+fdate(f))+".","ok");toast("Salida guardada");$("x_cant").value="";$("x_notas").value="";$("x_socnew").value="";$("x_motnew").value=""}
+}
+
+/* ---------- ajustes, exportar ---------- */
+const lines=s=>[...new Set(s.split("\n").map(x=>x.trim().toUpperCase()).filter(Boolean))];
+const LISTS=[["socios","Socios"],["geneticas","Genéticas"],["bancos","Bancos de semillas"],["origenes","Orígenes / proveedores"],["tipos","Tipos de entrada"],["motivos","Motivos de baja"]];
+const USO={socios:(k)=>S.salidas.filter(x=>x.socio===k).length,geneticas:(k)=>S.entradas.filter(x=>x.genetica===k).length,bancos:(k)=>S.germinaciones.filter(x=>x.banco===k).length,origenes:(k)=>S.entradas.filter(x=>x.origen===k).length,tipos:(k)=>S.entradas.filter(x=>x.tipo===k).length,motivos:(k)=>S.salidas.filter(x=>x.motivo===k).length};
+function buildListas(){
+  $("l_wrap").innerHTML='<div class="card"><label class="f">Cloneras (con su tamaño)</label><div class="chips" id="ch_cloneras"></div><div class="addrow"><input type="text" id="cl_n" placeholder="Nombre (ej: CLONERA 3)" maxlength="40" autocomplete="off"><select id="cl_t" style="width:auto"><option value="6x12">6×12 · 72 lugares</option><option value="5x10">5×10 · 50 lugares</option></select></div><button class="btn primary" type="button" data-addcl="1" style="margin-top:8px">Agregar clonera</button><div class="hint" id="lm_cloneras"></div></div>'+LISTS.map(a=>'<div class="card"><label class="f">'+a[1]+'</label><div class="chips" id="ch_'+a[0]+'"></div><div class="addrow"><input type="text" id="li_'+a[0]+'" placeholder="Agregar nuevo…" maxlength="60" autocomplete="off"><button class="btn primary" type="button" data-add="'+a[0]+'">Agregar</button></div><div class="hint" id="lm_'+a[0]+'"></div></div>').join("");
+}
+function fillListas(){
+  $("ch_cloneras").innerHTML=(cfg.cloneraDefs||[]).map(d=>'<button class="chip2" type="button" data-rmcl="'+esc(d.n)+'">'+esc(d.n)+" · "+d.f+"×"+d.c+" ("+d.f*d.c+") <b>✕</b></button>").join("")||'<span class="hint">Sin cloneras</span>';
+  LISTS.forEach(a=>{$("ch_"+a[0]).innerHTML=cfg[a[0]].map(v=>'<button class="chip2" type="button" data-rm="'+a[0]+'|'+esc(v)+'">'+esc(v)+' <b>✕</b></button>').join("")||'<span class="hint">Vacía</span>'});
+  if(document.activeElement!==$("l_cmb"))$("l_cmb").value=cfg.capMB;if(document.activeElement!==$("l_c420"))$("l_c420").value=cfg.cap420;if(document.activeElement!==$("l_plazo"))$("l_plazo").value=cfg.plazoClon;
+}
+const lmsg=(k,t,c)=>{$("lm_"+k).textContent=t;$("lm_"+k).className="hint "+c};
+async function addFromUI(k){
+  const v=$("li_"+k).value.trim().toUpperCase().replace(/\s+/g," ");
+  if(!v)return;
+  if(!db||!canWrite)return lmsg(k,"Tu usuario es solo lectura.","bad");
+  if(v.includes("|"))return lmsg(k,"No uses el símbolo | en los nombres.","bad");
+  if(cfg[k].includes(v))return lmsg(k,"Ya existe: "+v,"bad");
+  try{await mergeCfg(b=>{b[k]=(b[k]||[]).includes(v)?b[k]:(b[k]||[]).concat([v]);return b});$("li_"+k).value="";lmsg(k,"Agregado: "+v,"ok")}catch(e){lmsg(k,explain(e),"bad")}
+}
+async function removeFromUI(k,v){
+  if(!db||!canWrite)return lmsg(k,"Tu usuario es solo lectura.","bad");
+  if(cfg[k].length<=1)return lmsg(k,"La lista no puede quedar vacía.","bad");
+  const n=USO[k](v);
+  try{await mergeCfg(b=>{b[k]=(b[k]||[]).filter(x=>x!==v);return b});lmsg(k,"Quitado: "+v+(n?". Los "+n+" registros que ya lo usan lo conservan.":"."),"ok")}catch(e){lmsg(k,explain(e),"bad")}
+}
+async function addClonera(){
+  const n=$("cl_n").value.trim().toUpperCase().replace(/\s+/g," "),t=$("cl_t").value;
+  const q=t.split("x"),f=+q[0],c=+q[1];
+  if(!n)return climsg("Escribí el nombre de la clonera.","bad");
+  if(!db||!canWrite)return climsg("Tu usuario es solo lectura.","bad");
+  if(isNaN(f)||isNaN(c)||f<1||c<1||f>30||c>30)return climsg("Filas y columnas: enteros de 1 a 30.","bad");
+  if((cfg.cloneraDefs||[]).some(d=>d.n===n))return climsg("Ya existe: "+n,"bad");
+  try{await mergeCfg(b=>{b.cloneraDefs=(b.cloneraDefs||[]).concat([{n,f,c}]);return b});$("cl_n").value="";climsg("Agregada: "+n+" ("+f+"×"+c+" = "+f*c+" lugares)","ok")}catch(e){climsg(explain(e),"bad")}
+}
+async function removeClonera(n){
+  if(!db||!canWrite)return climsg("Tu usuario es solo lectura.","bad");
+  const c=C.cl.find(x=>x.def.n===n);
+  if(c&&c.occ>0)return climsg("No se puede quitar "+n+": tiene "+c.occ+" clones. Trasplantalos o dalos de baja primero.","bad");
+  try{await mergeCfg(b=>{b.cloneraDefs=(b.cloneraDefs||[]).filter(d=>d.n!==n);return b});climsg("Quitada: "+n,"ok")}catch(e){climsg(explain(e),"bad")}
+}
+async function saveCfg(ev){
+  ev.preventDefault();clearMsg("a_msg");
+  const a=int($("l_cmb").value),b=int($("l_c420").value),pz=int($("l_plazo").value);
+  if(isNaN(a)||isNaN(b)||a<0||b<0)return say("a_msg","Las capacidades tienen que ser enteros de 0 en adelante.","bad");
+  if(isNaN(pz)||pz<0||pz>120)return say("a_msg","El plazo tiene que ser un entero entre 0 y 120 días.","bad");
+  try{await mergeCfg(x=>Object.assign(x,{capMB:a,cap420:b,plazoClon:pz}));say("a_msg","Guardado.","ok")}catch(e){say("a_msg",explain(e),"bad")}
+}
+function stockRows(){return C.buckets.map(b=>({LOTE:b.code,GENETICA:b.e?b.e.genetica:"",MADRE:b.e?b.e.madre:"",CLONERA:b.e?b.e.clonera:"",LITRAJE:b.lit,INVENTARIO:b.inv,"ASIGNADO MB":b.mb,"ASIGNADO 420":b.s420,"STOCK PARA VENTA":b.venta,"ENTREGAS PROGRAMADAS":b.disp,"ENTREGAS REALIZADAS":b.ent,BAJAS:b.baja,MUERTES:b.mue,"PARA OFRECER":b.ofertable?b.ofrecer:"NO OFRECIBLE"}))}
+async function save(name,data,msg){
+  try{const dl=await claude.use("downloads");if(!dl)return say(msg,"La descarga no está disponible en esta vista.","bad");
+    await dl.save({filename:name,data});say(msg,"Listo.","ok")}catch(e){say(msg,e&&e.code==="declined"?"Descarga cancelada.":"No se pudo descargar ("+((e&&e.code)||"error")+").","bad")}
+}
+async function exportXlsx(){
+  if(typeof XLSX==="undefined")return say("a_xmsg","No cargó la librería de Excel. Probá el CSV.","bad");
+  const e=new Map(SA.entradas.map(x=>[x.id,x])),L=id=>{const x=e.get(id);return x?"L"+pad(x.n):"?"},G=id=>{const x=e.get(id);return x?x.genetica:""};
+  const AU=x=>({ESTADO:x.anulado?"ANULADO":"ACTIVO","CARGADO POR":x.por||"","FECHA CARGA":x.ts?new Date(x.ts).toLocaleString("es-AR"):"","ANULADO POR":x.anuladoPor||"","FECHA ANULACION":x.anuladoTs?new Date(x.anuladoTs).toLocaleString("es-AR"):"","MOTIVO ANULACION":x.anuladoMotivo||"",CORRECCIONES:(x.rev||[]).filter(v=>v.tipo!=="ENTREGA").length});
+  const wb=XLSX.utils.book_new();
+  const add=(n,rows)=>XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows.length?rows:[{}]),n);
+  add("STOCK",stockRows());
+  const clr=[];C.cl.forEach(c=>{if(!c.lots.length)clr.push({CLONERA:c.def.n,TAMAÑO:c.def.f+"x"+c.def.c,CAPACIDAD:c.cap,OCUPADAS:c.occ,LIBRES:c.libres});c.lots.forEach(l=>clr.push({CLONERA:c.def.n,TAMAÑO:c.def.f+"x"+c.def.c,CAPACIDAD:c.cap,OCUPADAS:c.occ,LIBRES:c.libres,LOTE:l.code,GENETICA:l.gen,CANTIDAD:l.q}))});
+  add("CLONERAS",clr);
+  add("GERMINACION",C.gs.map(x=>({SIEMBRA:x.g.fecha,GENETICA:x.g.genetica,BANCO:x.g.banco,SEMILLAS:x.sem,GERMINADAS:x.germ,"NO GERMINARON":x.cerrada?x.sem-x.germ:"(abierta)","% GERMINACION":x.sem?Math.round(x.germ/x.sem*100)+"%":"",PERDIDOS:x.perd,"PASADOS A INVENTARIO":x.pas,"PARA PASAR":x.pend,ESTADO:x.cerrada?"CERRADA":"EN GERMINACION",LOTES:x.lotes.map(e=>"L"+pad(e.n)+" "+e.litraje+" x"+e.cantidad).join("; ")})));
+  add("GERMINACION EVENTOS",SA.germ_ev.map(x=>{const g=SA.germinaciones.find(y=>y.id===x.germ);return Object.assign({FECHA:x.fecha,GENETICA:g?g.genetica:"",BANCO:g?g.banco:"",EVENTO:x.tipo,CANTIDAD:x.cantidad,NOTAS:x.notas},AU(x))}));
+  add("ENTRADAS",SA.entradas.slice().sort((a,b)=>a.n-b.n).map(x=>Object.assign({LOTE:"L"+pad(x.n),FECHA:x.fecha,TIPO:x.tipo,CLONERA:x.clonera,GENETICA:x.genetica,MADRE:x.madre,GENERACION:x.gen,LITRAJE:x.litraje,CANTIDAD:x.cantidad,ORIGEN:x.origen,NOTAS:x.notas},AU(x))));
+  add("TRASPLANTES",SA.trasplantes.map(x=>Object.assign({FECHA:x.fecha,LOTE:L(x.lote),GENETICA:G(x.lote),DESDE:x.desde,HASTA:x.hasta,CANTIDAD:x.cantidad,"BAJAS POR MUERTE":x.muertes,NOTAS:x.notas},AU(x))));
+  add("ASIGNACIONES",SA.asignaciones.map(x=>Object.assign({FECHA:x.fecha,SALA:x.sala,LOTE:L(x.lote),GENETICA:G(x.lote),LITRAJE:x.litraje,CANTIDAD:x.cantidad,NOTAS:x.notas},AU(x))));
+  add("SALIDAS",SA.salidas.map(x=>Object.assign({"FECHA ENTREGA":x.fecha,LOTE:L(x.lote),GENETICA:G(x.lote),LITRAJE:x.litraje,CANTIDAD:x.cantidad,DESTINO:x.destino,SOCIO:x.socio,MOTIVO:x.motivo,"ENTREGADA":x.destino==="BAJA"?"":(x.entregado?"SI":"NO"),NOTAS:x.notas},AU(x))));
+  const hist=[];movements().forEach(m=>{const r=m.raw||{},revs=r.rev||[],cur=stripMeta(r);hist.push({MOVIMIENTO:m.title,FECHA:m.fecha,EVENTO:"CARGA",QUIEN:r.por||"",CUANDO:r.ts?new Date(r.ts).toLocaleString("es-AR"):"",MOTIVO:"",DETALLE:m.q+" "+m.qs});revs.forEach((v,i)=>hist.push({MOVIMIENTO:m.title,FECHA:m.fecha,EVENTO:v.tipo==="ENTREGA"?"ENTREGA":"CORRECCION",QUIEN:v.por||"",CUANDO:v.ts?new Date(v.ts).toLocaleString("es-AR"):"",MOTIVO:v.motivo||"",DETALLE:diffText(v.antes||{},i<revs.length-1?revs[i+1].antes:cur)}));if(r.anulado)hist.push({MOVIMIENTO:m.title,FECHA:m.fecha,EVENTO:"ANULACION",QUIEN:r.anuladoPor||"",CUANDO:r.anuladoTs?new Date(r.anuladoTs).toLocaleString("es-AR"):"",MOTIVO:r.anuladoMotivo||"",DETALLE:""})});
+  add("HISTORIAL DE CAMBIOS",hist);
+  const buf=XLSX.write(wb,{bookType:"xlsx",type:"array"});
+  save("ESQUEJES MARUJO - "+today()+".xlsx",buf,"a_xmsg");
+}
+function exportCsv(){
+  const r=stockRows();if(!r.length)return say("a_xmsg","No hay stock para exportar.","bad");
+  const h=Object.keys(r[0]),q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+  save("STOCK CLONES - "+today()+".csv","﻿"+[h.map(q).join(",")].concat(r.map(x=>h.map(k=>q(x[k])).join(","))).join("\n"),"a_xmsg");
+}
+
+/* ---------- render y eventos ---------- */
+let raf=0;
+function refreshNow(){
+  C=compute(effS());renderBanners();fillForms();
+  updEnBadge();if(view==="inicio")renderInicio();else if(view==="entregas")renderEntregas();else if(view==="stock")renderStock();else if(view==="historial")renderHist();else if(view==="cloneras"){if(!(clEditing&&$("c_list").contains(document.activeElement)))renderCloneras()}else if(view==="germ")renderGerm();else if(view==="listas"){fillListas();renderAjustes()}
+  applyBtns();
+}
+function refresh(){cancelAnimationFrame(raf);raf=requestAnimationFrame(refreshNow)}
+function go(v,keep){if(!keep&&corr)endCorr();if(v!=="cloneras")homeEntrada();view=v;document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id==="v-"+v));document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));window.scrollTo(0,0);refresh()}
+function openForm(f){form=f;if(f==="entrada")homeEntrada();$("formcard").style.display="block";document.querySelectorAll("#formcard form").forEach(x=>x.classList.toggle("on",x.id==="f-"+f));document.querySelectorAll("#tiles .tile").forEach(t=>t.classList.toggle("on",t.dataset.f===f));$("formcard").scrollIntoView({behavior:"smooth",block:"start"})}
+$("nav").addEventListener("click",e=>{const b=e.target.closest("button");if(b)go(b.dataset.v)});
+$("tiles").addEventListener("click",e=>{const b=e.target.closest(".tile");if(b){if(corr)endCorr();openForm(b.dataset.f)}});
+$("status").addEventListener("click",()=>go("listas"));
+$("f-entrada").addEventListener("submit",onEntrada);$("f-trasplante").addEventListener("submit",onTras);$("f-sala").addEventListener("submit",onSala);$("f-salida").addEventListener("submit",onSalida);
+NEWS.forEach(n=>$(n[0]).addEventListener("change",showNews));
+$("e_madre").addEventListener("input",()=>{$("e_madre").value=$("e_madre").value.replace(/\D/g,"")});
+["e_lit","e_clonera","e_cant"].forEach(i=>{$(i).addEventListener("input",liveE);$(i).addEventListener("change",liveE)});
+["t_bk","t_cant","t_mue","t_dest"].forEach(i=>$(i).addEventListener("input",liveT));
+["s_bk","s_cant"].forEach(i=>$(i).addEventListener("input",liveS));
+document.querySelectorAll("input[name=s_sala]").forEach(r=>r.addEventListener("change",liveS));
+["x_bk","x_cant"].forEach(i=>$(i).addEventListener("input",liveX));
+document.querySelectorAll("input[name=x_dest]").forEach(r=>r.addEventListener("change",dest));
+["k_q","k_gen","k_nz"].forEach(i=>$(i).addEventListener("input",renderStock));
+$("k_lits").addEventListener("click",e=>{const c=e.target.closest(".chip");if(c){c.classList.toggle("on");renderStock()}});
+$("h_f").addEventListener("click",e=>{const c=e.target.closest("[data-hf]");if(c){hFilter=c.dataset.hf;renderHist()}});
+$("h_list").addEventListener("click",e=>{
+  const b=e.target.closest("[data-an],[data-co],[data-en]");if(!b)return;
+  const sp=v=>{const i=v.indexOf("|");return [v.slice(0,i),v.slice(i+1)]};
+  if(b.dataset.an){const p=sp(b.dataset.an);return annul(p[0],p[1])}
+  if(b.dataset.co){const p=sp(b.dataset.co);return startCorr(p[0],p[1])}
+  if(b.dataset.en){const p=sp(b.dataset.en);return setEntrega(p[1],p[0]==="1")}
+});
+function updEnBadge(){try{const b=$("en_bd");if(!b)return;const td=today(),p=S.salidas.filter(s=>s.destino!=="BAJA"&&!s.entregado);b.textContent=p.length;b.style.display=p.length?"":"none";b.style.background=p.some(s=>s.fecha<td)?"var(--bad)":"var(--c-disp)"}catch(e){}}
+function enCard(s,lotes,td,done){
+  const x=lotes.get(s.lote),nom=x?"L"+pad(x.n)+" · "+x.genetica+(x.madre?" #"+x.madre:""):"lote borrado";
+  const dd=Math.round((new Date(s.fecha)-new Date(td))/864e5);
+  const when=isNaN(dd)?"":dd<0?"VENCIDA · hace "+(-dd)+(dd===-1?" día":" días"):dd===0?"HOY":dd===1?"MAÑANA":"EN "+dd+" DÍAS";
+  const cls=done?"done":dd<0?"late":dd===0?"today":"";
+  let info=done?'<span class="ew">ENTREGADA</span> · '+fdt(s.entregadoTs)+(s.entregadoPor?" · por "+esc(s.entregadoPor):"")+" · programada "+fdate(s.fecha):'<span class="ew">'+when+'</span> · '+fdate(s.fecha);
+  info+=(s.socio?" · socio: "+esc(s.socio):"")+(s.notas?"<br>"+esc(s.notas):"");
+  const btn=!canWrite?"":done?'<button class="btn sm" data-en="0|'+s.id+'" type="button">Deshacer entrega</button>':'<button class="btn primary big" data-en="1|'+s.id+'" type="button">✔ ENTREGADO</button>';
+  return '<div class="en '+cls+'"><div class="eh"><div class="eg">'+esc(nom)+'</div><div class="eq">'+s.cantidad+'<small>'+esc(s.litraje)+'</small></div></div><div class="ed">'+info+'</div>'+btn+'</div>';
+}
+function renderEntregas(){
+  const td=today(),lotes=new Map(S.entradas.map(x=>[x.id,x]));
+  const all=S.salidas.filter(s=>s.destino!=="BAJA");
+  const pend=all.filter(s=>!s.entregado).sort((a,b)=>a.fecha<b.fecha?-1:a.fecha>b.fecha?1:0);
+  const done=all.filter(s=>s.entregado).sort((a,b)=>(b.entregadoTs||0)-(a.entregadoTs||0)).slice(0,30);
+  const late=pend.filter(s=>s.fecha<td),hoy=pend.filter(s=>s.fecha===td),prox=pend.filter(s=>s.fecha>td);
+  const q=a=>a.reduce((n,s)=>n+(+s.cantidad||0),0);
+  const sec=(t,a,d)=>a.length?'<h2>'+t+' ('+a.length+')</h2>'+a.map(s=>enCard(s,lotes,td,d)).join(""):"";
+  $("v-entregas").innerHTML=
+   '<div class="kpis"><div class="kpi disp"><div class="l">Pendientes</div><div class="n">'+pend.length+'</div><div class="s">'+q(pend)+' clones por entregar</div></div><div class="kpi baja"><div class="l">Vencidas</div><div class="n">'+late.length+'</div><div class="s">'+q(late)+' clones</div></div></div>'+
+   (canWrite?'<div style="margin:12px 0"><button class="btn big" data-newen="1" type="button">+ Programar entrega</button></div>':'')+
+   (pend.length?'':'<div class="card empty" style="margin-top:12px">No hay entregas programadas.</div>')+
+   sec("Vencidas",late)+sec("Hoy",hoy)+sec("Próximas",prox)+sec("Entregadas (últimas 30)",done,true);
+}
+$("v-entregas").addEventListener("click",async e=>{
+  if(e.target.closest("[data-newen]")){go("cargar");openForm("salida");return}
+  const b=e.target.closest("[data-en]");if(!b)return;
+  const i=b.dataset.en.indexOf("|"),id=b.dataset.en.slice(i+1),val=b.dataset.en.slice(0,i)==="1";
+  if(val){const s=S.salidas.find(x=>x.id===id);if(!s)return;
+    const ok=await askModal({title:"¿Confirmás la entrega?",msg:s.cantidad+" × "+s.litraje+(s.socio?" · socio: "+s.socio:"")+" · programada "+fdate(s.fecha),ok:"Sí, entregado",body:"",get:()=>true});
+    if(!ok)return}
+  setEntrega(id,val);
+});
+$("nav").addEventListener("click",()=>setTimeout(()=>{const b=document.querySelector("#nav button.on");if(b&&b.scrollIntoView)try{b.scrollIntoView({inline:"center",block:"nearest"})}catch(e){}},0));
+$("v-inicio").addEventListener("click",e=>{const b=e.target.closest("[data-en]");if(!b)return;const i=b.dataset.en.indexOf("|");setEntrega(b.dataset.en.slice(i+1),b.dataset.en.slice(0,i)==="1")});
+$("k_list").addEventListener("click",e=>{
+  const b=e.target.closest("[data-sc]");if(!b)return;
+  const i=b.dataset.sc.indexOf("|"),f=b.dataset.sc.slice(0,i),k=b.dataset.sc.slice(i+1);
+  go("cargar");openForm(f);refreshNow();
+  const sel={trasplante:"t_bk",sala:"s_bk",salida:"x_bk"}[f],qt={trasplante:"t_cant",sala:"s_cant",salida:"x_cant"}[f];
+  sset(sel,k);$(sel).dispatchEvent(new Event("input",{bubbles:true}));setTimeout(()=>$(qt).focus(),300);
+});
+$("who").addEventListener("click",pickOp);
+$("banners").addEventListener("click",async e=>{
+  if(e.target.closest("#corrCancel")){endCorr();return}
+  const b=e.target.closest("#delEj");if(!b)return;
+  if(!b.dataset.arm){b.dataset.arm="1";b.textContent="¿Seguro? Tocá de nuevo";setTimeout(()=>{b.dataset.arm="";b.textContent="Borrar ejemplos"},4000);return}
+  b.disabled=true;let n=0;
+  try{for(const c of COLS)for(const r of S[c].filter(r=>r.ejemplo)){await db.doc(c+"/"+r.id).delete();n++}toast("Se borraron "+n+" registros de ejemplo")}catch(er){toast(explain(er))}
+});
+$("a_form").addEventListener("submit",saveCfg);
+$("l_wrap").addEventListener("click",e=>{
+  if(e.target.closest("[data-addcl]"))return addClonera();
+  const rc=e.target.closest("[data-rmcl]");
+  if(rc){if(rc.dataset.arm){clearTimeout(rc._t);return removeClonera(rc.dataset.rmcl)}
+    rc.dataset.arm="1";const old=rc.innerHTML;rc.classList.add("arm");rc.innerHTML="¿Quitar? tocá de nuevo";rc._t=setTimeout(()=>{rc.dataset.arm="";rc.classList.remove("arm");rc.innerHTML=old},3500);return}
+  const a=e.target.closest("[data-add]");if(a)return addFromUI(a.dataset.add);
+  const r=e.target.closest("[data-rm]");if(!r)return;
+  if(r.dataset.arm){clearTimeout(r._t);const i=r.dataset.rm.indexOf("|");return removeFromUI(r.dataset.rm.slice(0,i),r.dataset.rm.slice(i+1))}
+  r.dataset.arm="1";const old=r.innerHTML;r.classList.add("arm");r.innerHTML="¿Quitar? tocá de nuevo";r._t=setTimeout(()=>{r.dataset.arm="";r.classList.remove("arm");r.innerHTML=old},3500);
+});
+$("l_wrap").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.id&&e.target.id.startsWith("li_")){e.preventDefault();addFromUI(e.target.id.slice(3))}});
+$("a_xlsx").addEventListener("click",exportXlsx);$("a_csv").addEventListener("click",exportCsv);
+
+/* ---------- arranque ---------- */
+(async function init(){
+  buildListas();updateWho();fillForms();refresh();
+  const timer=setTimeout(()=>{if(!COLS.every(k=>loaded[k])){const s=$("status");s.className="pill warn";s.textContent="Sin respuesta aún…"}},10000);
+  try{
+    db=await claude.use("db");
+    if(!db){dbErr="Esta vista no tiene acceso a la base de datos. Abrí la página desde claude.ai con tu sesión iniciada.";refresh();return}
+    try{const u=await claude.use("user");if(u){const w=await Promise.resolve(u.can("data.write"));if(w===false)canWrite=false;try{myUid=await u.id()}catch(e){}}}catch(e){}
+    COLS.forEach(c=>{db.collection(c).onSnapshot(snap=>{SA[c]=snap.docs.map(d=>Object.assign({id:d.id},d.data()));S[c]=SA[c].filter(r=>!r.anulado);loaded[c]=true;clearTimeout(timer);refresh()},err=>{dbErr="Error leyendo "+c+" ("+(err&&err.code)+").";refresh()})});
+    db.doc("config/listas").onSnapshot(snap=>{cfg=Object.assign({},DEF,snap.exists?snap.data():{});refresh()},()=>{});
+  }catch(e){dbErr="No se pudo iniciar la base de datos.";refresh()}
+})();
+})();
+/* ---------- selector propio (legible en celu, sin depender del tema del sistema) ---------- */
+(function(){
+  var open=false;
+  function close(){var p=document.getElementById('pk');if(p)p.remove();open=false}
+  function showPk(s){
+    if(open||s.disabled)return;open=true;
+    var lab=s.closest('label'),t='';
+    if(lab){var n=lab.firstChild;while(n&&n.nodeType!==3&&n.nodeType!==1)n=n.nextSibling;t=(lab.childNodes[0]&&lab.childNodes[0].nodeType===3?lab.childNodes[0].textContent:'').trim()}
+    var p=document.createElement('div');p.id='pk';p.className='pk';
+    var b=document.createElement('div');b.className='box';
+    var h=document.createElement('div');h.className='ttl';h.textContent=t||'Elegí una opción';b.appendChild(h);
+    var l=document.createElement('div');l.className='lst';
+    var cur=null;
+    Array.prototype.forEach.call(s.options,function(o){
+      var it=document.createElement('button');it.type='button';it.className='it'+(o.selected?' on':'');
+      var sp=document.createElement('span');sp.textContent=o.text;it.appendChild(sp);
+      if(o.selected){var ck=document.createElement('span');ck.className='ck';ck.textContent='✓';it.appendChild(ck);cur=it}
+      it.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();
+        s.value=o.value;
+        s.dispatchEvent(new Event('input',{bubbles:true}));s.dispatchEvent(new Event('change',{bubbles:true}));
+        close()});
+      l.appendChild(it)});
+    b.appendChild(l);
+    var c=document.createElement('button');c.type='button';c.className='cx';c.textContent='CANCELAR';c.addEventListener('click',close);b.appendChild(c);
+    p.appendChild(b);
+    p.addEventListener('click',function(e){if(e.target===p)close()});
+    document.body.appendChild(p);
+    if(cur)setTimeout(function(){try{cur.scrollIntoView({block:'center'})}catch(e){}},0);
+  }
+  function hit(e){var s=e.target&&e.target.closest?e.target.closest('select'):null;if(!s)return;e.preventDefault();e.stopPropagation();if(e.type==='mousedown'||e.type==='touchstart'||e.type==='click')showPk(s)}
+  document.addEventListener('mousedown',hit,true);
+  document.addEventListener('click',function(e){var s=e.target&&e.target.closest?e.target.closest('select'):null;if(s){e.preventDefault();e.stopPropagation()}},true);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&open){close();e.stopPropagation();return}
+    var s=e.target;if(s&&s.tagName==='SELECT'&&(e.key==='Enter'||e.key===' '||e.key==='ArrowDown')){e.preventDefault();showPk(s)}
+  },true);
+})();
+</script>
+
+</body></html>
